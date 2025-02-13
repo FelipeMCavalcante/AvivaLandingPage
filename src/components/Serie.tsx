@@ -30,50 +30,50 @@ export default function Serie() {
 
   const SLIDES: Slide[] = [
     {
-      src: '/imgEvents/bgMari.jpg',
-      hoverSrc: '/imgEvents/hoverMari4.png',
+      src: '/imgEvents/SERIE 1.PNG',
+      hoverSrc: '/imgEvents/SERIE 1.PNG',
       title: 'SERIE 1',
       description:
         'O Mari Sem Fim é uma maratona de música, energia e emoção! Criada por Mari Fernandez, essa label já rodou o Brasil com shows épicos em festivais como Caldas Country e Jaguariúna. Cada edição é pura intensidade, com a galera vibrando ao som dos maiores hits da artista!',
     },
     {
-      src: '/imgEvents/bgKiss.jpg',
-      hoverSrc: '/imgEvents/hoverkiss2.png',
+      src: '/imgEvents/SERIE2.PNG',
+      hoverSrc: '/imgEvents/SERIE2.PNG',
       title: 'SERIE 2',
       description:
         'A Kiss Me, do Felipe Amorim, chega misturando piseiro, trap, funk e pop em uma festa única. Desde a estreia em 2022, em Fortaleza, já passou por Natal e voltou com tudo em 2023 no Colosso. É ritmo, vibe e muita resenha!',
     },
     {
-      src: '/imgEvents/bgDesmanttelo.jpg',
-      hoverSrc: '/imgEvents/hovernattan.png',
+      src: '/imgEvents/SERIE3.PNG',
+      hoverSrc: '/imgEvents/SERIE3.PNG',
       title: 'SERIE 3',
       description:
         'O Desmantello do Nattan veio para causar! Desde 2023, a festa arrasta multidões com a energia e o carisma do Nattan. Em 2025, o desmantello cresce: vira festival! Dia 8 de fevereiro, Recife vai ferver com o rolê mais esperado do ano!',
     },
     {
-      src: '/imgEvents/bgAvioes.jpg',
-      hoverSrc: '/imgEvents/hoverAvioes2.png',
+      src: '/imgEvents/SERIE4.PNG',
+      hoverSrc: '/imgEvents/SERIE4.PNG',
       title: 'SERIE 4',
       description:
         'O Aviões Fantasy é a festa à fantasia que já virou tradição com Xand Avião. A maior festa à fantasia do Brasil. Em 2023, rolou no dia 28 de outubro, em Fortaleza, com uma estrutura gigante para 45 mil pessoas! Além do show, a festa movimenta a economia — em 2022, foram R$ 12 milhões e visitantes de 15 estados. É música, criatividade e interação em cenários temáticos e experiências que fazem a galera pirar.',
     },
     {
-      src: '/imgEvents/bgNoittada.jpg',
-      hoverSrc: '/imgEvents/hoverNoittada2.png',
+      src: '/imgEvents/SERIE5.PNG',
+      hoverSrc: '/imgEvents/SERIE5.PNG',
       title: 'SERIE 5',
       description:
         'Noittada com Nattan é o novo rolê do Nattan que teve sua largada no dia 13 de dezembro de 2024, em Salvador, no Terminal Náutico. Exclusiva e intimista, essa festa "all black" traz uma vibe sofisticada, misturando o luxo europeu com a energia das noites nova-iorquinas. É Nattan levando o conceito de festa para outro nível. Vem muito som e momentos únicos por aí!',
     },
     {
-      src: '/imgEvents/bgXandy.jpg',
-      hoverSrc: '/imgEvents/hoverXandy2.png',
+      src: '/imgEvents/SERIE6.PNG',
+      hoverSrc: '/imgEvents/SERIE6.PNG',
       title: 'SERIE 6',
       description:
         'O Xand’s Bar é aquele projeto que traz o Xand Avião para perto, num clima de resenha e nostalgia. É como entrar num bar onde o próprio Xand puxa o som, cantando os hits que marcaram sua história. A próxima edição rola dia 21 de dezembro de 2024, no Marina Park Hotel, em Fortaleza. Um encontro descontraído e cheio de memória afetiva — bora?',
     },
     {
-      src: '/imgEvents/bgViiixe.jpg',
-      hoverSrc: '/imgEvents/hoverViiixe2.png',
+      src: '/imgEvents/SERIE7.PNG',
+      hoverSrc: '/imgEvents/SERIE7.PNG',
       title: 'SERIE 7',
       description:
         'O VIIIXE! é o festival que coloca a música nordestina no topo! Desde 2022, ele já arrastou multidões pelo Brasil, somando mais de 300 mil pessoas na primeira turnê. Em 2024, voltou com tudo pra São Paulo, na Arena Anhembi, no dia 20 de abril. É forró, estrutura gigante e uma vibe única, com o público vibrando do começo ao fim. E em 2025, o objetivo é claro: ser o maior festival de forró do mundo!',
@@ -101,7 +101,7 @@ export default function Serie() {
         <p className='text-[80px] font-ozikB mt-10 text-[#030303]'>Séries</p>
       </div>
 
-      <div className='text-gray-800 justify-center flex font-outfitregular text-lg p-5 font-bold'>
+      <div className='text-gray-800 justify-center text-center flex font-outfitregular text-lg p-5 font-bold'>
         <p>Todas as séries do movimento Aviva e um pouco do que sobre elas.</p>
       </div>
 
@@ -135,7 +135,7 @@ export default function Serie() {
               <img
                 src={selectedSlide.src}
                 alt={selectedSlide.title}
-                className='w-full h-auto rounded-md'
+                className='w-auto h-auto rounded-md'
               />
             </div>
             <div className='ml-6 flex flex-col justify-center'>
@@ -171,7 +171,7 @@ const EmblaCarousel = ({
       >
         ❮
       </button>
-      <div className='overflow-hidden w-full' ref={emblaRef}>
+      <div className='overflow-hidden w-auto' ref={emblaRef}>
         <div className='flex'>
           {slides.map((slide, index) => (
             <div
@@ -179,17 +179,11 @@ const EmblaCarousel = ({
               className='flex-[0_0_80%] md:flex-[0_0_50%] lg:flex-[0_0_25%] px-2 cursor-pointer group'
               onClick={() => onSlideClick(index)}
             >
-              <div className='bg-gray-100 w-full h-auto rounded-lg shadow-md overflow-hidden relative'>
+              <div className='bg-gray-100 w-auto h-auto rounded-lg shadow-md overflow-hidden relative'>
                 <img
                   src={slide.src}
                   alt={slide.title}
-                  className='object-cover transition-opacity duration-300 group-hover:opacity-0'
-                />
-                <img
-                  src={slide.hoverSrc}
-                  alt={`${slide.title} hover`}
-                  className='h-full object-cover absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100'
-                  loading='lazy'
+                  className='object-cover w-full transition-opacity duration-300'
                 />
               </div>
             </div>

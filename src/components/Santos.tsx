@@ -81,13 +81,6 @@ const EmblaCarousel = ({
 
   return (
     <section className='relative mb-0 sm:mb-20'>
-      <button
-        onClick={scrollPrev}
-        className='absolute left-0 top-1/2 transform -translate-y-1/2 text-black w-12 h-12 flex items-center justify-center rounded-full z-10 shadow-md transition-all bg-white'
-      >
-        ❮
-      </button>
-
       <div className='overflow-hidden w-full' ref={emblaRef}>
         <div className='flex gap-0 min-w-0'>
           {slides.map((slide, index) => (
@@ -112,13 +105,6 @@ const EmblaCarousel = ({
           ))}
         </div>
       </div>
-
-      <button
-        onClick={scrollNext}
-        className='absolute right-0 top-1/2 transform -translate-y-1/2 text-black w-12 h-12 flex items-center justify-center rounded-full z-10 shadow-md transition-all bg-white'
-      >
-        ❯
-      </button>
     </section>
   );
 };

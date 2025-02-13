@@ -107,7 +107,7 @@ export default function Highlights() {
       </div>
 
       {/* Descrição */}
-      <div className='text-gray-800 justify-center flex font-outfitregular font-bold text-lg p-5'>
+      <div className='text-gray-800 justify-center text-center flex font-outfitregular font-bold text-lg p-5'>
         <p>
           Desafiando Limites e Criando Oportunidades para Transformar Vidas pelo
           Evangelho.
