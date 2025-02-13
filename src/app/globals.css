@@ -1,0 +1,39 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+body {
+  color: var(--foreground);
+  background: var(--background);
+}
+
+#Events {
+  scroll-margin-top:112px;
+}
+#Sente {
+  scroll-margin-top:222px;
+}
+#Artist {
+  scroll-margin-top:142px;
+}
+#Projects {
+  scroll-margin-top:142px;
+}
+#Insta {
+  scroll-margin-top:115px;
+}
+#Contact {
+  scroll-margin-top:115px;
+}
