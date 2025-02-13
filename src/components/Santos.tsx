@@ -1,6 +1,6 @@
 'use client';
 import useEmblaCarousel from 'embla-carousel-react';
-import { useCallback, useEffect } from 'react';
+import { useEffect } from 'react';
 
 interface Slide {
   bgSrc: string;
@@ -69,15 +69,7 @@ const EmblaCarousel = ({
   options,
   onSlideClick,
 }: EmblaCarouselProps) => {
-  const [emblaRef, emblaApi] = useEmblaCarousel(options);
-
-  const scrollPrev = useCallback(() => {
-    if (emblaApi) emblaApi.scrollPrev();
-  }, [emblaApi]);
-
-  const scrollNext = useCallback(() => {
-    if (emblaApi) emblaApi.scrollNext();
-  }, [emblaApi]);
+  const [emblaRef] = useEmblaCarousel(options);
 
   return (
     <section className='relative mb-0 sm:mb-20'>
