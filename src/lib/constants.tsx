@@ -24,11 +24,12 @@ import {
 import { TbBrandNextjs, TbBrandTerraform, TbBrandVercel } from 'react-icons/tb';
 
 export const NAVIGATION = [
-  { name: 'SENTE ESSA VYBBE', href: '/#Sente', current: true },
+  { name: 'MOVIMENTO', href: '/#Sente', current: true },
   { name: 'ARTISTAS', href: '/#Artist', current: false },
-  { name: 'EVENTOS', href: '/#Events', current: false },
+  { name: 'SÉRIES', href: '/#Serie', current: false },
   { name: 'PROJETOS', href: '/#Projects', current: false },
-  { name: 'INSTA VYBBE', href: '/#Insta', current: false },
+  { name: 'INSTA AVIVA', href: '/#Insta', current: false },
+  { name: 'CONTATO', href: '/#Contacts', current: false },
 ];
 
 export interface ClientImageProps {

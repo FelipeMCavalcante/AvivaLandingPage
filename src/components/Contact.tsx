@@ -56,11 +56,11 @@ export default function Contact() {
       <div className='relative z-10 p-8 flex flex-col sm:flex-row justify-between items-center max-w-5xl mx-auto rounded-lg'>
         <div className='text-center sm:text-left sm:mr-8'>
           <h1 className='text-[#030303] text-[70px] font-bold font-ozikB leading-[55.02px] tracking-[4.20px]'>
-            QUERO SENTIR ESSA VYBBE
+            QUERO PARTICIPAR DO MOVIMENTO
           </h1>
           <p className='mt-2 text-[#030303] font-outfitregular font-bold text-2xl'>
-            Fique por dentro do universo do palco <br /> dos maiores hits do
-            Brasil.
+            Fique por dentro de todos os avisos
+            <br /> dos nossos eventos e encontros.
           </p>
         </div>
 

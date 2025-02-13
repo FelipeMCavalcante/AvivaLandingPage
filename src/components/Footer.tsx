@@ -145,11 +145,11 @@ export default function Footer() {
         <div className='z--100 w-full flex flex-wrap xl:-ml-[440px] lg:-ml-[240px] lg:px-40 lg:justify-center lg:gap-6 lg:mt-10 text-[#030303] font-outfitregular font-bold'>
           {/* Primeiro grupo */}
           <div className='w-full lg:w-1/4 flex flex-col lg:items-center text-center lg:border-r-4 lg:border-black'>
-            <Link href='/#Sente' className='text-lg mt-4 hover:text-[#fe6150]'>
-              Sente essa Vibe
+            <Link href='/#Us' className='text-lg mt-4 hover:text-[#fe6150]'>
+              Movimento
             </Link>
-            <Link href='/#Events' className='text-lg mt-4 hover:text-[#fe6150]'>
-              Eventos
+            <Link href='/#Serie' className='text-lg mt-4 hover:text-[#fe6150]'>
+              Séries
             </Link>
             <Link
               href='/#Projects'
@@ -164,7 +164,7 @@ export default function Footer() {
               Artistas
             </Link>
             <Link href='/#Insta' className='text-lg mt-4 hover:text-[#fe6150]'>
-              Insta Vybbe
+              Insta Aviva
             </Link>
             <Link
               href='/#Contact'
@@ -176,11 +176,12 @@ export default function Footer() {
         </div>
 
         <div className='absolute right-0 bottom-0 top-0 lg:w-[280px] hidden lg:block'>
-          <img src='polygon.png' className='w-full h-full' alt='Imagem' />
+          <img
+            src='/imgArtist/NSG.png'
+            className='w-full h-full'
+            alt='Imagem'
+          />
         </div>
-      </div>
-      <div className=''>
-        <img src='line.png' className='w-full h-auto z-10' alt='Imagem' />
       </div>
     </>
   );

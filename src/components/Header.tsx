@@ -59,8 +59,8 @@ export default function Header() {
       {({ open }) => (
         <>
           <div className='mx-auto max-w-7xl px-2 sm:px-6 lg:px-8 font-ozikB'>
-            <div className='relative flex h-28 items-center justify-between'>
-              <div className='flex flex-1 items-center justify-center lg:items-stretch lg:justify-between'>
+            <div className='relative flex h-28 items-center justify-center'>
+              <div className='flex flex-1 items-end justify-center lg:items-stretch lg:justify-center'>
                 <div className='flex flex-shrink-0 items-center xl:ml-8 sm:ml-0'>
                   <Link href='/'>
                     <Image
@@ -74,14 +74,14 @@ export default function Header() {
                 </div>
 
                 <div className='hidden lg:ml-6 lg:block w-full mb-4'>
-                  <div className='flex justify-end mr-6 space-x-4'>
+                  <div className='flex justify-end mr-20 space-x-4'>
                     <div>
                       <a
                         target='_blank'
                         href='https://www.instagram.com/vybbe/'
                       >
                         <svg
-                          className='w-8 h-8 text-black hover:text-red-500 transition-all duration-300'
+                          className='w-8 h-8 text-black hover:text-[#3871FE] transition-all duration-300'
                           xmlns='http://www.w3.org/2000/svg'
                           viewBox='0 0 32 32'
                           fill='currentColor'
@@ -94,7 +94,7 @@ export default function Header() {
                     <div>
                       <a target='_blank' href='https://www.tiktok.com/@_vybbe'>
                         <svg
-                          className='w-8 h-8 text-black hover:text-red-500 transition-all duration-300'
+                          className='w-8 h-8 text-black hover:text-[#3871FE] transition-all duration-300'
                           xmlns='http://www.w3.org/2000/svg'
                           viewBox='0 0 32 32'
                           fill='currentColor'
@@ -111,7 +111,7 @@ export default function Header() {
                     <div>
                       <a target='_blank' href='https://www.youtube.com/@vybbe'>
                         <svg
-                          className='w-8 h-8 text-black hover:text-red-500 transition-all duration-300'
+                          className='w-8 h-8 text-black hover:text-[#3871FE] transition-all duration-300'
                           xmlns='http://www.w3.org/2000/svg'
                           viewBox='0 0 32 32'
                           fill='currentColor'
@@ -131,64 +131,13 @@ export default function Header() {
                         </svg>
                       </a>
                     </div>
-
-                    <div>
-                      <a
-                        target='_blank'
-                        href='https://www.linkedin.com/company/vybbe/'
-                      >
-                        <svg
-                          className='w-8 h-8 text-black hover:text-red-500 transition-all duration-300'
-                          xmlns='http://www.w3.org/2000/svg'
-                          viewBox='0 0 32 32'
-                          fill='currentColor'
-                        >
-                          <path
-                            fillRule='evenodd'
-                            clipRule='evenodd'
-                            d='M16 0C7.16344 0 0 7.16344 0 16C0 24.8366 7.16344 32 16 32C24.8366 32 32 24.8366 32 16C32 7.16344 24.8366 0 16 0ZM7.68108 13.2519H11.307V24.1464H7.68108V13.2519ZM11.5453 9.8818C11.5218 8.8136 10.7579 8 9.5175 8C8.27709 8 7.46615 8.8136 7.46615 9.8818C7.46615 10.9279 8.25312 11.7649 9.47043 11.7649H9.4936C10.7579 11.7649 11.5453 10.9279 11.5453 9.8818ZM20.2085 12.9961C22.5945 12.9961 24.3833 14.5535 24.3833 17.8998L24.3832 24.1464H20.7574V18.3178C20.7574 16.8538 20.2327 15.8548 18.9201 15.8548C17.9183 15.8548 17.3217 16.5283 17.0596 17.1788C16.9637 17.4119 16.9402 17.7367 16.9402 18.0623V24.1467H13.3138C13.3138 24.1467 13.3616 14.2745 13.3138 13.2522H16.9402V14.7953C17.4214 14.0535 18.2834 12.9961 20.2085 12.9961Z'
-                          ></path>
-                        </svg>
-                      </a>
-                    </div>
-                    <div>
-                      <a target='_blank' href='https://x.com/vybbe_'>
-                        <svg
-                          className='w-8 h-8 text-black hover:text-red-500 transition-all duration-300'
-                          width='32'
-                          height='32'
-                          viewBox='0 0 32 32'
-                          xmlns='http://www.w3.org/2000/svg'
-                          fill='currentColor'
-                        >
-                          <g
-                            id='Icon/redes sociais'
-                            clipPath='url(#clip0_1985_1128)'
-                          >
-                            <path
-                              id='Vector'
-                              d='M14.2928 0.11741C8.67109 0.704077 3.64794 4.4052 1.36442 9.64274C-0.107152 13.0241 -0.352059 16.9174 0.692848 20.5016C1.98351 24.9707 5.32218 28.7465 9.64218 30.635C13.0235 32.1065 16.9168 32.3514 20.5013 31.3065C25.8662 29.7599 30.0904 25.355 31.4771 19.8825C33.642 11.3067 28.3302 2.5381 19.7328 0.490744C17.8444 0.0427438 16.1813 -0.0748029 14.2928 0.11741ZM14.5062 10.0267C15.8711 11.8401 17.0235 13.3334 17.0662 13.3334C17.1088 13.3334 18.5279 11.8401 20.2022 10.0267L23.2635 6.72008H25.0022L24.6288 7.11517C24.4155 7.33832 23.0288 8.84253 21.5462 10.4534C20.0635 12.0641 18.6129 13.6316 18.3244 13.9201L17.8128 14.4641L21.8128 19.7867C24.0102 22.7201 25.8128 25.1516 25.8128 25.1952C25.8128 25.2485 24.5013 25.2801 22.9111 25.2801L19.9995 25.2694L17.2902 21.6427C15.4235 19.1361 14.5488 18.0581 14.4635 18.1227C14.3995 18.1761 12.8844 19.8085 11.0928 21.7494L7.83952 25.2801H7.01776C6.55951 25.2801 6.18618 25.2583 6.18618 25.2267C6.18618 25.1952 7.88218 23.3383 9.95109 21.1094C12.0104 18.8801 13.7171 17.0134 13.7378 16.9818C13.7488 16.9383 12.0528 14.6241 9.97285 11.8401C7.89285 9.06674 6.18618 6.77341 6.18618 6.75165C6.18618 6.73096 7.49776 6.72008 9.10885 6.72008H12.0311L14.5062 10.0267Z'
-                            />
-                            <path
-                              id='Vector_2'
-                              d='M8.82175 8.14933C8.8642 8.224 11.5516 11.8293 14.7733 16.1382L20.64 23.9891L21.9516 24C22.7624 24 23.2533 23.9573 23.2316 23.8933C23.2217 23.84 20.5442 20.2351 17.3017 15.8933L11.3916 8H10.0693C8.97108 8 8.74665 8.02176 8.82175 8.14933Z'
-                            />
-                          </g>
-                          <defs>
-                            <clipPath id='clip0_1985_1128'>
-                              <rect width='32' height='32' fill='white' />
-                            </clipPath>
-                          </defs>
-                        </svg>
-                      </a>
-                    </div>
                   </div>
                   <div className='flex h-full items-center ml-20 justify-around mt-[-10px] font-ozikBold'>
                     {NAVIGATION.map((item) => (
                       <a
                         key={item.name}
                         href={item.href}
-                        className={`rounded-full px-4 py-2 text-sm  xl:text-xl lg:text-lg font-8 text-[#00121C] hover:text-[#FE6150] hover:border-primary-700 transition-colors duration-500 ease-in-out font-proximanova uppercase ${
+                        className={`rounded-full px-4 py-2 text-sm  xl:text-xl lg:text-lg font-8 text-[#00121C] hover:text-[#3871FE] hover:border-primary-700 transition-colors duration-500 ease-in-out font-proximanova uppercase ${
                           currentPath === item.href ? '#00121C text-white' : ''
                         }`}
                         aria-current={
@@ -198,30 +147,7 @@ export default function Header() {
                         {item.name}
                       </a>
                     ))}
-                    <div className='text-[#00121C] hover:text-[#FE6150] cursor-pointer text-sm xl:text-lg font-8 flex '>
-                      <i>
-                        <svg
-                          width='24'
-                          height='24'
-                          viewBox='0 0 24 24'
-                          fill='none'
-                          xmlns='http://www.w3.org/2000/svg'
-                          className='stroke-current'
-                        >
-                          <path
-                            d='M21 12C21 16.9706 16.9706 21 12 21M21 12C21 7.02944 16.9706 3 12 3M21 12H3M12 21C7.02944 21 3 16.9706 3 12M12 21C10.2232 19.3691 9 15.9517 9 12C9 8.04831 10.2232 4.63094 12 3M12 21C13.7768 19.3691 15 15.9517 15 12C15 8.04831 13.7768 4.63094 12 3M3 12C3 7.02944 7.02944 3 12 3'
-                            strokeWidth='2'
-                            strokeLinecap='round'
-                            strokeLinejoin='round'
-                          />
-                        </svg>
-                      </i>
-                      <select className='border-none outline-none bg-transparent appearance-none ml-1'>
-                        <option value='pt'>PT - PORTUGUÊS</option>
-                        <option value='en'>EN - INGLÊS</option>
-                        <option value='es'>ES - ESPANHOL</option>
-                      </select>
-                    </div>
+                    <div className='text-[#00121C] hover:text-[#3871FE] cursor-pointer text-sm xl:text-lg font-8 flex '></div>
                   </div>
                 </div>
               </div>

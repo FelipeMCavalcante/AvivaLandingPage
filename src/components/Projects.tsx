@@ -109,8 +109,8 @@ export default function Highlights() {
       {/* Descrição */}
       <div className='text-gray-800 justify-center flex font-outfitregular font-bold text-lg p-5'>
         <p>
-          Desafiando limites e criando oportunidades que mudam o mundo: conheça
-          os projetos transformadores desenvolvidos pela Vybbe.
+          Desafiando Limites e Criando Oportunidades para Transformar Vidas pelo
+          Evangelho.
         </p>
       </div>
 

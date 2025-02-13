@@ -105,14 +105,14 @@ export default function Insta() {
     <div className='p-5 bg-[#F7F7F7] w-full' id='Insta'>
       <div className='flex justify-center'>
         <p className='text-[40px] sm:text-[60px] md:text-[80px] font-ozikB mt-10 text-[#030303] text-center'>
-          INSTA VYBBE
+          INSTA AVIVA
         </p>
       </div>
 
       <div className='text-gray-800 flex justify-center text-base sm:text-lg p-5 font-bold text-center'>
         <p>
           Acompanhe todas as novidades e conteúdos exclusivos dos nossos
-          artistas seguindo a Vybbe no Instagram!
+          movimento seguindo o Aviva no Instagram!
         </p>
       </div>
 
