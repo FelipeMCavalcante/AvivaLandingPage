@@ -53,7 +53,9 @@ export default function Artist() {
   return (
     <div className='bg-white' id='Artist'>
       <div className='flex justify-center'>
-        <p className='text-[80px] font-ozikB mb-4 text-[#030303]'>ARTISTAS</p>
+        <p className='text-[80px] font-ozikB mb-4 text-[#030303]'>
+          TESTE ARTISTA
+        </p>
       </div>
 
       <div className='text-gray-800 justify-center flex text-lg px-5 text-center font-outfitregular font-bold'>
