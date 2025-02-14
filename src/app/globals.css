@@ -19,20 +19,20 @@ body {
   background: var(--background);
 }
 
-#Events {
-  scroll-margin-top:112px;
+#Serie {
+  scroll-margin-top:100px;
 }
-#Sente {
-  scroll-margin-top:222px;
+#Us {
+  scroll-margin-top:122px;
 }
-#Artist {
-  scroll-margin-top:142px;
+#Santos {
+  scroll-margin-top:262px;
 }
 #Projects {
-  scroll-margin-top:142px;
+  scroll-margin-top:102px;
 }
 #Insta {
-  scroll-margin-top:115px;
+  scroll-margin-top:85px;
 }
 #Contact {
   scroll-margin-top:115px;

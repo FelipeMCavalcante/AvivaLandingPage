@@ -17,25 +17,25 @@ export default function Footer() {
       <div className='w-full lg:w-1/3 flex flex-col lg:flex-row justify-center items-center text-center gap-10 text-[#030303] font-outfitregular font-bold'>
         {/* Primeiro grupo */}
         <div className='flex flex-col items-center'>
-          <Link href='/#Us' className='text-lg mt-4 hover:text-[#fe6150]'>
+          <Link href='/#Us' className='text-lg mt-4 hover:text-[#3871FE]'>
             Movimento
           </Link>
-          <Link href='/#Serie' className='text-lg mt-4 hover:text-[#fe6150]'>
+          <Link href='/#Serie' className='text-lg mt-4 hover:text-[#3871FE]'>
             Séries
           </Link>
-          <Link href='/#Projects' className='text-lg mt-4 hover:text-[#fe6150]'>
+          <Link href='/#Projects' className='text-lg mt-4 hover:text-[#3871FE]'>
             Projetos
           </Link>
         </div>
         {/* Segundo grupo */}
         <div className='flex flex-col items-center'>
-          <Link href='/#Artist' className='text-lg mt-4 hover:text-[#fe6150]'>
-            Artistas
+          <Link href='/#Us' className='text-lg mt-4 hover:text-[#3871FE]'>
+            Santos
           </Link>
-          <Link href='/#Insta' className='text-lg mt-4 hover:text-[#fe6150]'>
+          <Link href='/#Insta' className='text-lg mt-4 hover:text-[#3871FE]'>
             Insta Aviva
           </Link>
-          <Link href='/#Contact' className='text-lg mt-4 hover:text-[#fe6150]'>
+          <Link href='/#Contact' className='text-lg mt-4 hover:text-[#3871FE]'>
             Contato
           </Link>
         </div>

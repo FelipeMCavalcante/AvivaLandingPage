@@ -223,7 +223,7 @@ export default function Insta() {
                 target='_blank'
               >
                 <svg
-                  className='w-12 h-12 text-black hover:text-red-500 transition-all duration-300'
+                  className='w-12 h-12 text-black hover:text-[#3871FE] transition-all duration-300'
                   xmlns='http://www.w3.org/2000/svg'
                   viewBox='0 0 32 32'
                   fill='currentColor'
@@ -235,11 +235,11 @@ export default function Insta() {
                 href={modalVideo.permalink}
                 target='_blank'
                 className='relative font-ozikB mt-2 text-black 
-             bg-gradient-to-r from-black via-red-500 to-black 
+             bg-gradient-to-r from-black via-[#3871FE] to-black 
              bg-[length:200%_100%] bg-clip-text text-transparent 
              animate-wave'
               >
-                SENTE ESSA VYBBE
+                INSTA AVIVA
               </a>
             </div>
           </div>

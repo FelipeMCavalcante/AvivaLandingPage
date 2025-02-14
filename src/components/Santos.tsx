@@ -72,7 +72,7 @@ const EmblaCarousel = ({
   const [emblaRef] = useEmblaCarousel(options);
 
   return (
-    <section className='relative mb-0 sm:mb-20'>
+    <section className='relative mb-0 sm:mb-20' id='Santos'>
       <div className='overflow-hidden w-full' ref={emblaRef}>
         <div className='flex gap-0 min-w-0'>
           {slides.map((slide, index) => (

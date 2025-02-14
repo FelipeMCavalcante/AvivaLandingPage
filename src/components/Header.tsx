@@ -63,13 +63,22 @@ export default function Header() {
               <div className='flex flex-1 items-end justify-center lg:items-stretch lg:justify-center'>
                 <div className='flex flex-shrink-0 items-center xl:ml-8 sm:ml-0'>
                   <Link href='/'>
-                    <Image
-                      src={'/imgHeader/Vybbe-Logo.png'}
-                      alt='VYBBE'
-                      width={145}
-                      height={50}
-                      className='object-contain'
-                    />
+                    <div className='relative w-[145px] h-[50px]'>
+                      <Image
+                        src={'/AVIVABLACK.png'}
+                        alt='VYBBE'
+                        width={145}
+                        height={50}
+                        className='object-contain transition-opacity duration-300 hover:opacity-0'
+                      />
+                      <Image
+                        src={'/avivablue.png'}
+                        alt='VYBBE'
+                        width={145}
+                        height={50}
+                        className='object-contain absolute top-0 left-0 transition-opacity duration-300 opacity-0 hover:opacity-100'
+                      />
+                    </div>
                   </Link>
                 </div>
 

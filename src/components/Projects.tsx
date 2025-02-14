@@ -50,52 +50,40 @@ export default function Highlights() {
 
   const SLIDES: Slide[] = [
     {
-      src: '/imgProjects/P1.png',
-      title: 'PARÁRRAIÁ',
+      src: '/imgProjects/j1.png',
+      title: 'FEIJOADA',
       description:
-        'O Parárraiá, o São João da Amazônia 2024, rolou entre os dias 13 e 16 de junho no estacionamento do Mangueirão, em Belém. Foi a estreia do Pará no circuito das grandes festas juninas do Brasil, e que estreia! Com entrada gratuita, milhares de pessoas curtiram a festa todas as noites. A cultura amazônica brilhou em shows de Luan Santana, Xand Avião, Joelma, João Gomes, Mari Fernandez e Nattan, além de apresentações regionais e quadrilhas juninas.',
-    },
-    {
-      src: '/imgProjects/P2.png',
-      title: 'SÃO JOÃO DE CAMPINA GRANDE',
-      description:
-        'No Maior São João do Mundo, em Campina Grande, os artistas da Vybbe deram um show à parte no Parque do Povo. Destaque para o emocionante “Forró é Pop”, de Xand Avião, que resgatou as raízes do forró em uma noite histórica. A Vybbe foi parceira na realização desse momento único, celebrando a tradição e a modernidade do forró em sua essência.',
-    },
-    {
-      src: '/imgProjects/P3.png',
-      title: 'EUSÉBIO JUNINO',
-      description:
-        'O Eusébio Junino 2024, de 22 a 30 de junho, celebrou os 37 anos do município de Eusébio, no Ceará, com muita festa e tradição. Cerca de 100 mil pessoas curtiram uma programação rica, com festival de quadrilhas e shows gratuitos. No palco, Mari Fernandez, Xand Avião, Nattan e DJ Alok fizeram a festa! O evento também fortaleceu a economia local, gerando empregos e impulsionando o comércio. Uma celebração que já é tradição no calendário junino do Brasil!',
-    },
-    {
-      src: '/imgProjects/P4.png',
-      title: 'SÃO JOÃO DE PETROLINA',
-      description:
-        'No São João de Petrolina 2024, realizado entre os dias 14 e 24 de junho no Pátio de Eventos Ana das Carrancas, artistas da Vybbe tiveram grande destaque na programação. Xand Avião, Nattan, Mari Fernandez, Zé Vaqueiro e Felipe Amorim animaram o público em noites memoráveis. O evento, considerado um dos maiores festejos juninos do Brasil, reuniu cerca de 50 atrações e atraiu milhares de pessoas, consolidando-se como um marco cultural e econômico para a cidade.',
-    },
-    {
-      src: '/imgProjects/P5.png',
-      title: 'BUMBA MEU SÃO JOÃO',
-      description:
-        'No São João de São Luís 2024, a Vybbe marcou presença com o exclusivo espaço “Bumba Meu São João”, realizado na área externa do Castelão entre 13 e 21 de junho. A festa trouxe uma programação poderosa com Xand Avião, Mari Fernandez, Nattan, Felipe Amorim, Zé Vaqueiro, Jonas Esticado e Guilherme Dantas. Além dos talentos da Vybbe, o evento contou com apresentações de artistas nacionais e regionais, celebrando a diversidade e a riqueza cultural do Maranhão em uma experiência única.',
-    },
-    {
-      src: '/imgProjects/P6.png',
-      title: 'SÃO JOÃO DE BANANEIRAS',
-      description:
-        'No São João de Bananeiras 2024, a Vybbe levou sua energia contagiante para o Bananeiras Parque, na Paraíba! De 14 a 24 de junho, Xand Avião, Nattan, Mari Fernandez e Felipe Amorim embalaram a festa com shows que reuniram multidões e agitaram a cidade. Com uma estrutura grandiosa e uma vibe junina inesquecível, o evento movimentou cerca de R$ 40 milhões na economia local, consolidando Bananeiras como um dos principais destinos juninos do Nordeste.',
+        "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
     },
     {
       src: '/imgProjects/j1.png',
-      title: 'TUMTARARÁ',
+      title: 'AVIVAMENTO',
       description:
-        'Liderado por Xand Avião em parceria com o IPREDE, essa iniciativa beneficia mais de 2 mil crianças, incluindo aquelas com deficiência, autismo, microcefalia e paralisia cerebral. Financiado pelo próprio artista, o espaço dedicado à música vai além das notas: é terapia, inclusão e desenvolvimento. Aqui, a cultura nordestina e a solidariedade se unem para mostrar que a arte pode mudar o mundo. É emoção, é propósito, é a força da música fazendo a diferença!',
+        "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
     },
     {
-      src: '/imgProjects/P9.png',
-      title: 'VEM PRA VYBBE',
+      src: '/imgProjects/j1.png',
+      title: 'RETIRO AVIVA',
       description:
-        'O "Vem pra Vybbe" é um projeto lançado em 2024 para descobrir novos talentos nas áreas de produção musical, artística e audiovisual. Após inscrições e etapas seletivas, realizadas no mês de novembro em Fortaleza, os aprovados de diferentes áreas foram contratados para integrar a equipe da Vybbe, contribuindo com seus grandes projetos e eventos. A iniciativa reforça o compromisso da empresa com inovação e renovação no mercado do entretenimento',
+        "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+    },
+    {
+      src: '/imgProjects/j1.png',
+      title: 'PROJETO1',
+      description:
+        "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+    },
+    {
+      src: '/imgProjects/j1.png',
+      title: 'PROJETO2',
+      description:
+        "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+    },
+    {
+      src: '/imgProjects/j1.png',
+      title: 'PROJETO3',
+      description:
+        "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
     },
   ];
 

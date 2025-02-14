@@ -2,9 +2,11 @@
 
 export default function Us() {
   return (
-    <div className='bg-white p-8 mt-10 pb-40' id='Sente'>
+    <div className='bg-white p-8 mt-10 pb-40' id='Us'>
       <div className='grid grid-cols-1 md:grid-cols-2 gap-8 items-center'>
-        <div className='flex justify-center'></div>
+        <div className='flex justify-center'>
+          <img src='/avivablueblack.png' alt='' className='px-28' />
+        </div>
         <div className='text-base leading-relaxed text-gray-800 font-medium text-center md:text-left'>
           <p className='text-[20px] font-outfitregular'>
             O Movimento Aviva é, para nós, um verdadeiro sonho de Deus. Fundado
