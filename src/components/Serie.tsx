@@ -1,7 +1,7 @@
 'use client';
 import useEmblaCarousel from 'embla-carousel-react';
 import { useCallback, useEffect, useState } from 'react';
-// OUTRO PR
+
 interface Slide {
   src: string;
   hoverSrc: string;
