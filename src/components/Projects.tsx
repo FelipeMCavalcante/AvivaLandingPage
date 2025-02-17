@@ -64,27 +64,12 @@ export default function Highlights() {
       title: 'RETIRO AVIVA',
       description: 'Descrição do evento Retiro Aviva',
     },
-    {
-      src: '/imgProjects/j1.png',
-      title: 'PROJETO1',
-      description: 'Descrição do evento Projeto1',
-    },
-    {
-      src: '/imgProjects/j1.png',
-      title: 'PROJETO2',
-      description: 'Descrição do evento Projeto2',
-    },
-    {
-      src: '/imgProjects/j1.png',
-      title: 'PROJETO3',
-      description: 'Descrição do evento Projeto3',
-    },
   ];
 
   return (
     <div className='bg-[#fcfcfc] relative' id='Projects'>
       <div className='flex justify-center mt-10'>
-        <p className='text-[80px] font-bold mt-10 text-[#030303]'>PROJETOS</p>
+        <p className='text-[80px] font-bold mt-10 text-[#030303]'>EVENTOS</p>
       </div>
 
       <div className='text-gray-800 text-center font-bold text-lg p-5'>
