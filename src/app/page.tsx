@@ -1,9 +1,9 @@
-import Contact from '@/components/Contact';
+// import Contact from '@/components/Contact';
 import Footer from '@/components/Footer';
 import Header from '@/components/Header';
 import Hero from '@/components/Hero';
 // import Insta from '@/components/Insta';
-import Projects from '@/components/Projects';
+import Eventos from '@/components/Eventos';
 import Santos from '@/components/Santos';
 import Serie from '@/components/Serie';
 import Us from '@/components/Us';
@@ -14,11 +14,12 @@ export default function Home() {
       <Header />
       <Hero />
       <Us />
-      <Santos />
+      <Hero />
       <Serie />
-      <Projects />
+      <Santos />
+      <Eventos />
+      {/* <Contact /> */}
       {/* <Insta /> */}
-      <Contact />
       <Footer />
     </main>
   );

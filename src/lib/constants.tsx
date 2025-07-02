@@ -28,7 +28,6 @@ export const NAVIGATION = [
   { name: 'SANTOS', href: '/#Santos', current: false },
   { name: 'SÉRIES', href: '/#Serie', current: false },
   { name: 'PROJETOS', href: '/#Projects', current: false },
-  { name: 'INSTA AVIVA', href: '/#Insta', current: false },
   { name: 'CONTATO', href: '/#Contact', current: false },
 ];
 
