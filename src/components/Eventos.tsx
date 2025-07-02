@@ -9,6 +9,7 @@ interface Slide {
   src: string;
   title: string;
   description: string;
+  link: string; // ← novo: link individual
 }
 
 interface EmblaCarouselProps {
@@ -18,8 +19,6 @@ interface EmblaCarouselProps {
 
 /* ---------- Componente principal ---------- */
 export default function Highlights() {
-  /* opções mudam se o viewport mudar; aqui mantive igual,
-     mas deixei a lógica pronta caso queira alterar depois */
   const [options, setOptions] = useState({
     loop: true,
     dragFree: true,
@@ -57,8 +56,8 @@ export default function Highlights() {
       src: '/imgEventos/forrozim.png',
       title: 'FORROZIM',
       description: '',
+      link: 'https://www.e-inscricao.com/paroquia-nossa-senhora-da-gloria/forrozim2025?fbclid=PAQ0xDSwLDx8VleHRuA2FlbQIxMQABp5ewi0KrjQ2UHSfvXDh8qltPISBHnPU33O81cNWW2zSwY3nsnNC-hgIoPIEx_aem_aWQK2hi5Z1A1dE7U4mEa_Q', // link exclusivo
     },
-    /* adicione mais objetos Slide aqui */
   ];
 
   return (
@@ -68,9 +67,11 @@ export default function Highlights() {
         <p className='text-[80px] font-ozikB mt-10 text-[#030303]'>Eventos</p>
       </div>
 
-      {/* subtítulo / descrição (vazio por enquanto) */}
+      {/* subtítulo / descrição (opcional) */}
       <div className='flex justify-center text-center p-5'>
-        <p className='text-lg font-outfitregular font-bold text-gray-800'>.</p>
+        <p className='text-lg font-outfitregular font-bold text-gray-800'>
+          Acompanhe aqui todos os nossos eventos.
+        </p>
       </div>
 
       {/* carrossel */}
@@ -93,7 +94,6 @@ const EmblaCarousel = ({ slides, options }: EmblaCarouselProps) => {
         <div className='flex'>
           {slides.map((slide, index) => (
             <div
-              /* ↓ largura menor dos cartões */
               className='flex-[0_0_60%] md:flex-[0_0_25%] px-1 mb-6'
               key={index}
             >
@@ -135,24 +135,25 @@ const EmblaCarousel = ({ slides, options }: EmblaCarouselProps) => {
                   alt={selectedSlide.title}
                   className='w-full h-60 object-cover rounded mb-4'
                 />
-                <Dialog.Title className='text-2xl font-bold'>
+                <Dialog.Title className='text-2xl font-bold text-center'>
                   {selectedSlide.title}
                 </Dialog.Title>
                 <p className='text-gray-700 mt-2'>
                   {selectedSlide.description}
                 </p>
 
+                {/* Botão com link individual */}
                 <a
-                  href='https://www.instagram.com/aviva.gloria/'
+                  href={selectedSlide.link}
                   target='_blank'
                   rel='noopener noreferrer'
-                  className='mt-4 bg-blue-600 text-white px-4 py-2 rounded w-full text-center block'
+                  className='mt-4 bg-blue-600 hover:bg-blue-700 transition text-white px-4 py-2 rounded w-full text-center block'
                 >
-                  Ver fotos
+                  Ver mais
                 </a>
 
                 <button
-                  className='mt-4 bg-gray-800 text-white px-4 py-2 rounded w-full'
+                  className='mt-4 bg-gray-800 hover:bg-gray-900 transition text-white px-4 py-2 rounded w-full'
                   onClick={() => setSelectedSlide(null)}
                 >
                   Fechar

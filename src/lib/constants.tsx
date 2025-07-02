@@ -25,10 +25,10 @@ import { TbBrandNextjs, TbBrandTerraform, TbBrandVercel } from 'react-icons/tb';
 
 export const NAVIGATION = [
   { name: 'MOVIMENTO', href: '/#Us', current: true },
-  { name: 'SANTOS', href: '/#Santos', current: false },
   { name: 'SÉRIES', href: '/#Serie', current: false },
-  { name: 'PROJETOS', href: '/#Projects', current: false },
-  { name: 'CONTATO', href: '/#Contact', current: false },
+  { name: 'BALUARTES', href: '/#Santos', current: false },
+  { name: 'EVENTOS', href: '/#Projects', current: false },
+  { name: 'COMUNIDADE', href: '/#Contact', current: false },
 ];
 
 export interface ClientImageProps {
