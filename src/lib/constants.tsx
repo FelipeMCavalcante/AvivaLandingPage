@@ -27,8 +27,8 @@ export const NAVIGATION = [
   { name: 'MOVIMENTO', href: '/#Us', current: true },
   { name: 'SÉRIES', href: '/#Serie', current: false },
   { name: 'BALUARTES', href: '/#Santos', current: false },
-  { name: 'EVENTOS', href: '/#Projects', current: false },
-  { name: 'COMUNIDADE', href: '/#Contact', current: false },
+  { name: 'EVENTOS', href: '/#Eventos', current: false },
+  { name: 'COMUNIDADE', href: '/#Footer', current: false },
 ];
 
 export interface ClientImageProps {

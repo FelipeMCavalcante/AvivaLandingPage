@@ -3,7 +3,7 @@
 export default function Hero() {
   return (
     <div>
-      <div className='bg-gray-100' id='Serie'>
+      <div className='bg-gray-100' id='Santos'>
         <div className='flex justify-center'>
           <p className='text-[80px] font-ozikB mt-10 text-[#030303]'>
             Baluartes

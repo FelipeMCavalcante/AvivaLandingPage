@@ -51,7 +51,7 @@ export default function Footer() {
                 Eventos
               </Link>
               <Link
-                href='/#Us'
+                href='/#Santos'
                 className='text-xl lg:text-2xl hover:text-[#3871FE]'
               >
                 Santos

@@ -87,7 +87,7 @@ export default function Header() {
                     <div>
                       <a
                         target='_blank'
-                        href='https://www.instagram.com/vybbe/'
+                        href='https://www.instagram.com/aviva.gloria/'
                       >
                         <svg
                           className='w-8 h-8 text-black hover:text-[#3871FE] transition-all duration-300'
@@ -99,9 +99,11 @@ export default function Header() {
                         </svg>
                       </a>
                     </div>
-
                     <div>
-                      <a target='_blank' href='https://www.youtube.com/@vybbe'>
+                      <a
+                        target='_blank'
+                        href='https://www.youtube.com/@paroquiagloriafor'
+                      >
                         <svg
                           className='w-8 h-8 text-black hover:text-[#3871FE] transition-all duration-300'
                           xmlns='http://www.w3.org/2000/svg'
