@@ -2,7 +2,7 @@ import Contact from '@/components/Contact';
 import Footer from '@/components/Footer';
 import Header from '@/components/Header';
 import Hero from '@/components/Hero';
-import Insta from '@/components/Insta';
+// import Insta from '@/components/Insta';
 import Projects from '@/components/Projects';
 import Santos from '@/components/Santos';
 import Serie from '@/components/Serie';
@@ -17,7 +17,7 @@ export default function Home() {
       <Santos />
       <Serie />
       <Projects />
-      <Insta />
+      {/* <Insta /> */}
       <Contact />
       <Footer />
     </main>
