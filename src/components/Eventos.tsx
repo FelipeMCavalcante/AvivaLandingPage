@@ -58,6 +58,18 @@ export default function Highlights() {
       description: '',
       link: 'https://www.e-inscricao.com/paroquia-nossa-senhora-da-gloria/forrozim2025?fbclid=PAQ0xDSwLDx8VleHRuA2FlbQIxMQABp5ewi0KrjQ2UHSfvXDh8qltPISBHnPU33O81cNWW2zSwY3nsnNC-hgIoPIEx_aem_aWQK2hi5Z1A1dE7U4mEa_Q', // link exclusivo
     },
+    {
+      src: '/imgEventos/festa-da-padroeira.png',
+      title: 'FESTA DA PADROEIRA',
+      description: '',
+      link: 'https://www.instagram.com/p/DLaXceOOKEq/?utm_source=ig_web_copy_link&igsh=MTYwOWExZWQ0OXRtMw==',
+    },
+    {
+      src: '/imgEventos/aviva-camp.png',
+      title: 'AVIVACAMP',
+      description: '',
+      link: 'https://www.instagram.com/p/DGZAHxQB9m0/?utm_source=ig_web_copy_link&igsh=ZnlqM2JtM3RiNnJs',
+    },
   ];
 
   return (
