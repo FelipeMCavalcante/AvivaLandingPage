@@ -53,6 +53,12 @@ export default function Highlights() {
   /* seus slides de evento */
   const SLIDES: Slide[] = [
     {
+      src: '/imgEventos/aviva-camp.png',
+      title: 'AVIVACAMP',
+      description: '',
+      link: 'https://drive.google.com/drive/folders/1DZVcE5SnhNEj8kfyFg0WVoIwb6QMiI23?usp=sharing',
+    },
+    {
       src: '/imgEventos/forrozim.png',
       title: 'FORROZIM',
       description: '',
@@ -63,12 +69,6 @@ export default function Highlights() {
       title: 'FESTA DA PADROEIRA',
       description: '',
       link: 'https://www.instagram.com/p/DLaXceOOKEq/?utm_source=ig_web_copy_link&igsh=MTYwOWExZWQ0OXRtMw==',
-    },
-    {
-      src: '/imgEventos/aviva-camp.png',
-      title: 'AVIVACAMP',
-      description: '',
-      link: 'https://drive.google.com/drive/folders/1DZVcE5SnhNEj8kfyFg0WVoIwb6QMiI23?usp=sharing',
     },
   ];
 
