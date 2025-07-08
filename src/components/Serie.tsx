@@ -9,8 +9,8 @@ interface Slide {
   hoverSrc: string;
   title: string;
   description: string;
-  photosUrl: string; // ← novo
-  playlistUrl: string; // ← novo
+  photosUrl?: string; // agora opcionais
+  playlistUrl?: string; // agora opcionais
 }
 
 interface EmblaCarouselProps {
@@ -39,8 +39,8 @@ export default function Serie() {
       hoverSrc: '/imgEvents/serie1.png',
       title: 'FAROL',
       description: 'Texto descritivo da série FAROL.',
-      photosUrl: 'https://exemplo.com/farol/fotos', // coloque seu link real
-      playlistUrl: 'https://exemplo.com/farol/playlist', // coloque seu link real
+      photosUrl: '',
+      playlistUrl: '',
     },
     {
       src: '/imgSerie/serie2.png',
@@ -55,8 +55,8 @@ export default function Serie() {
       hoverSrc: '/imgEvents/serie3.png',
       title: 'NÃO TENHAM MEDO',
       description: 'Texto descritivo da série NÃO TENHAM MEDO.',
-      photosUrl: 'https://exemplo.com/ntm/fotos',
-      playlistUrl: 'https://exemplo.com/ntm/playlist',
+      photosUrl: '',
+      playlistUrl: '',
     },
   ];
 
@@ -75,9 +75,9 @@ export default function Serie() {
     <div className='bg-gray-100' id='Serie'>
       {/* título e subtítulo */}
       <div className='flex justify-center'>
-        <p className='text-[80px] font-ozikB mt-10 text-[#030303]'>Séries</p>
+        <p className='mt-10 text-[80px] font-ozikB text-[#030303]'>Séries</p>
       </div>
-      <div className='flex justify-center text-center font-outfitregular text-lg p-5 font-bold text-gray-800'>
+      <div className='flex justify-center p-5 text-center font-outfitregular text-lg font-bold text-gray-800'>
         <p>Todas as séries do movimento Aviva e um pouco do que sobre elas.</p>
       </div>
 
@@ -126,25 +126,31 @@ export default function Serie() {
                 {selectedSlide.description}
               </p>
 
-              {/* --- novos botões --- */}
-              <div className='mt-6 flex gap-4'>
-                <Link
-                  href={selectedSlide.photosUrl}
-                  target='_blank'
-                  rel='noopener noreferrer'
-                  className='rounded-md bg-[#01C2CB] px-5 py-2 text-white transition-colors hover:bg-[#0199a1]'
-                >
-                  Ver fotos
-                </Link>
-                <Link
-                  href={selectedSlide.playlistUrl}
-                  target='_blank'
-                  rel='noopener noreferrer'
-                  className='rounded-md border border-[#01C2CB] px-5 py-2 text-[#01C2CB] transition-colors hover:bg-[#01C2CB] hover:text-white'
-                >
-                  Ver playlist
-                </Link>
-              </div>
+              {/* --- botões condicionais --- */}
+              {(selectedSlide.photosUrl || selectedSlide.playlistUrl) && (
+                <div className='mt-6 flex gap-4'>
+                  {selectedSlide.photosUrl && (
+                    <Link
+                      href={selectedSlide.photosUrl}
+                      target='_blank'
+                      rel='noopener noreferrer'
+                      className='rounded-md bg-[#01C2CB] px-5 py-2 text-white transition-colors hover:bg-[#0199a1]'
+                    >
+                      Ver fotos
+                    </Link>
+                  )}
+                  {selectedSlide.playlistUrl && (
+                    <Link
+                      href={selectedSlide.playlistUrl}
+                      target='_blank'
+                      rel='noopener noreferrer'
+                      className='rounded-md border border-[#01C2CB] px-5 py-2 text-[#01C2CB] transition-colors hover:bg-[#01C2CB] hover:text-white'
+                    >
+                      Ver playlist
+                    </Link>
+                  )}
+                </div>
+              )}
             </div>
           </div>
         </div>
@@ -169,7 +175,7 @@ const EmblaCarousel = ({
       {/* botão anterior */}
       <button
         onClick={scrollPrev}
-        className='absolute left-0 top-1/2 -translate-y-1/2 ml-4 w-12 h-12 flex items-center justify-center rounded-full bg-white text-black shadow-md z-10'
+        className='absolute left-0 top-1/2 z-10 ml-4 flex h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full bg-white text-black shadow-md'
       >
         ❮
       </button>
@@ -180,10 +186,10 @@ const EmblaCarousel = ({
           {slides.map((slide, index) => (
             <div
               key={index}
-              className='group flex-[0_0_80%] px-2 md:flex-[0_0_50%] lg:flex-[0_0_25%]'
+              className='group flex-[0_0_80%] cursor-pointer px-2 md:flex-[0_0_50%] lg:flex-[0_0_25%]'
               onClick={() => onSlideClick(index)}
             >
-              <div className='relative h-auto w-auto overflow-hidden rounded-lg bg-gray-100 shadow-md cursor-pointer'>
+              <div className='relative w-auto overflow-hidden rounded-lg bg-gray-100 shadow-md'>
                 <img
                   src={slide.src}
                   alt={slide.title}
@@ -198,7 +204,7 @@ const EmblaCarousel = ({
       {/* botão próximo */}
       <button
         onClick={scrollNext}
-        className='absolute right-0 top-1/2 -translate-y-1/2 mr-4 w-12 h-12 flex items-center justify-center rounded-full bg-white text-black shadow-md z-10'
+        className='absolute right-0 top-1/2 z-10 mr-4 flex h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full bg-white text-black shadow-md'
       >
         ❯
       </button>

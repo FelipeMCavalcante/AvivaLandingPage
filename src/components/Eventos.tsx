@@ -68,7 +68,7 @@ export default function Highlights() {
       src: '/imgEventos/aviva-camp.png',
       title: 'AVIVACAMP',
       description: '',
-      link: 'https://www.instagram.com/p/DGZAHxQB9m0/?utm_source=ig_web_copy_link&igsh=ZnlqM2JtM3RiNnJs',
+      link: 'https://drive.google.com/drive/folders/1DZVcE5SnhNEj8kfyFg0WVoIwb6QMiI23?usp=sharing',
     },
   ];
 
