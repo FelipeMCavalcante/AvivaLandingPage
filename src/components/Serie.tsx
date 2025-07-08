@@ -47,8 +47,8 @@ export default function Serie() {
       hoverSrc: '/imgEvents/serie2.png',
       title: 'MESA',
       description: 'Texto descritivo da série MESA.',
-      photosUrl: 'https://exemplo.com/mesa/fotos',
-      playlistUrl: 'https://exemplo.com/mesa/playlist',
+      photosUrl: '',
+      playlistUrl: '',
     },
     {
       src: '/imgSerie/serie3.png',
