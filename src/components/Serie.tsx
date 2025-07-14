@@ -8,9 +8,9 @@ interface Slide {
   src: string;
   hoverSrc: string;
   title: string;
-  description: string;
-  photosUrl?: string; // agora opcionais
-  playlistUrl?: string; // agora opcionais
+  pdfUrl?: string;
+  photosUrl?: string;
+  playlistUrl?: string;
 }
 
 interface EmblaCarouselProps {
@@ -33,30 +33,31 @@ export default function Serie() {
     },
   };
 
+  /* ---------- Slides ---------- */
   const SLIDES: Slide[] = [
     {
       src: '/imgSerie/serie1.png',
       hoverSrc: '/imgEvents/serie1.png',
       title: 'FAROL',
-      description: 'FAROL.',
+      pdfUrl: '/movimento-aviva-farol.pdf',
       photosUrl: '',
-      playlistUrl: '',
+      playlistUrl: 'https://open.spotify.com/playlist/6bDHa87vbMKRUGQqemz9M6',
     },
     {
       src: '/imgSerie/serie2.png',
       hoverSrc: '/imgEvents/serie2.png',
       title: 'MESA',
-      description: 'MESA.',
+      pdfUrl: '/movimento-aviva-mesa.pdf',
       photosUrl: '',
-      playlistUrl: '',
+      playlistUrl: 'https://open.spotify.com/playlist/1UWM7VbUdYkGbfqG57SYjy',
     },
     {
       src: '/imgSerie/serie3.png',
       hoverSrc: '/imgEvents/serie3.png',
       title: 'NÃO TENHAM MEDO',
-      description: 'NÃO TENHAM MEDO.',
+      pdfUrl: 'movimento-aviva-naotenhamedo.pdf',
       photosUrl: '',
-      playlistUrl: '',
+      playlistUrl: 'https://open.spotify.com/playlist/1V3iwsRwdZAh6pYi710GMO',
     },
   ];
 
@@ -78,7 +79,7 @@ export default function Serie() {
         <p className='mt-10 text-[80px] font-ozikB text-[#030303]'>Séries</p>
       </div>
       <div className='flex justify-center p-5 text-center font-outfitregular text-lg font-bold text-gray-800'>
-        <p>Todas as séries do movimento Aviva e um pouco do que sobre elas.</p>
+        <p>Todas as séries do movimento Aviva e seu direcionamento.</p>
       </div>
 
       {/* carrossel */}
@@ -108,7 +109,7 @@ export default function Serie() {
               ×
             </button>
 
-            {/* imagem */}
+            {/* imagem da série */}
             <div className='w-full flex-shrink-0 md:w-1/3'>
               <img
                 src={selectedSlide.src}
@@ -117,18 +118,42 @@ export default function Serie() {
               />
             </div>
 
-            {/* texto + botões */}
-            <div className='flex flex-col justify-center'>
-              <h2 className='font-ozikB text-[48px] text-gray-800'>
+            {/* conteúdo textual + botões */}
+            <div className='flex flex-col items-center md:items-start justify-center'>
+              {/* Ícone do Spotify acima do nome */}
+              {selectedSlide.playlistUrl && (
+                <Link
+                  href={selectedSlide.playlistUrl}
+                  target='_blank'
+                  rel='noopener noreferrer'
+                  className='mb-2 transition-transform hover:scale-105'
+                >
+                  <img
+                    src='/spotify.png'
+                    alt='Ouvir no Spotify'
+                    className='h-12 w-12'
+                  />
+                </Link>
+              )}
+
+              {/* Nome da série */}
+              <h2 className='font-ozikB text-[48px] text-gray-800 text-center md:text-left'>
                 {selectedSlide.title}
               </h2>
-              <p className='mt-2 font-outfitregular text-[16px] leading-[23.68px] text-gray-600'>
-                {selectedSlide.description}
-              </p>
 
-              {/* --- botões condicionais --- */}
-              {(selectedSlide.photosUrl || selectedSlide.playlistUrl) && (
-                <div className='mt-6 flex gap-4'>
+              {/* Botões alinhados juntos */}
+              {(selectedSlide.pdfUrl || selectedSlide.photosUrl) && (
+                <div className='mt-4 flex gap-4'>
+                  {selectedSlide.pdfUrl && (
+                    <a
+                      href={selectedSlide.pdfUrl}
+                      download
+                      className='rounded-md bg-[#3772ff] px-5 py-2 text-white transition-colors hover:bg-[#2855c7]'
+                    >
+                      Direcionamento
+                      <img src='/pdf.png' alt='' />
+                    </a>
+                  )}
                   {selectedSlide.photosUrl && (
                     <Link
                       href={selectedSlide.photosUrl}
@@ -137,16 +162,6 @@ export default function Serie() {
                       className='rounded-md bg-[#01C2CB] px-5 py-2 text-white transition-colors hover:bg-[#0199a1]'
                     >
                       Ver fotos
-                    </Link>
-                  )}
-                  {selectedSlide.playlistUrl && (
-                    <Link
-                      href={selectedSlide.playlistUrl}
-                      target='_blank'
-                      rel='noopener noreferrer'
-                      className='rounded-md border border-[#01C2CB] px-5 py-2 text-[#01C2CB] transition-colors hover:bg-[#01C2CB] hover:text-white'
-                    >
-                      Ver playlist
                     </Link>
                   )}
                 </div>

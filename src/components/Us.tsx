@@ -2,26 +2,24 @@
 
 export default function Us() {
   return (
-    <div className='bg-white p-8 mt-10 pb-20' id='Us'>
-      <div className='grid grid-cols-1 md:grid-cols-2 gap-8 items-center'>
-        <div className='flex justify-center'>
-          <img src='/avivablueblack.png' alt='' className='px-28' />
-        </div>
-        <div className='text-base leading-relaxed text-gray-800 font-medium text-center md:text-left'>
-          <p className='text-[20px] font-outfitregular'>
-            O Movimento Aviva é, para nós, um verdadeiro sonho de Deus. Fundado
-            em 2023 e com atividades iniciadas em 2024, conseguimos realizar
-            grandes obras em nosso primeiro ano. A providência divina tem sido
-            essencial e é percebida a cada passo que damos, certos de que Ele
-            nos dá o chão para pisarmos à medida que caminhamos. Mas, sabemos
-            que para que o milagre aconteça nós precisamos estar em movimento,
-            precisamos estar à serviço guardando a fé de que seremos amparados
-            se buscarmos com nossos esforços possíveis. Desse modo,
-            desenvolvemos a presente proposta para doadores e patrocinadores que
-            se identifiquem com a nossa iniciativa e queiram apoiar e incentivar
-            a evangelização da juventude e das famílias.
-          </p>
-        </div>
+    <div className='bg-white p-8' id='Us'>
+      <div className='flex justify-center'>
+        <p className='mt-10 text-[80px] font-ozikB text-[#030303] leading-[55.02px] text-center'>
+          QUEM SOMOS NÓS?
+        </p>
+      </div>
+      <div className='flex justify-center p-5 text-center font-outfitregular text-md md:text-lg lg:text-2xl font-bold text-gray-800'>
+        <p>
+          O Aviva é um movimento católico de evangelização que nasceu no coração
+          da juventude da Paróquia Nossa Senhora da Glória (Fortaleza-CE). Nosso
+          propósito é formar autênticos discípulos a partir de experiências
+          profundas de oração, vivência comunitária e doutrina sólida. Atuamos
+          com encontros quinzenais, retiros, vigílias e iniciativas criativas de
+          evangelização, especialmente voltadas aos jovens de 15 a 30 anos. Como
+          movimento, desejamos ser resposta ao chamado apostólico: “Ninguém te
+          despreze por seres jovem. Ao contrário, torna-te modelo para os fiéis
+          na palavra, na conduta, no amor, na fé, na pureza.” (1Tm 4,12).
+        </p>
       </div>
     </div>
   );
