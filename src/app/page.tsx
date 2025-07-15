@@ -17,8 +17,8 @@ export default function Home() {
       <Us />
       <Hero2 />
       <Serie />
-      <Santos />
       <Eventos />
+      <Santos />
       {/* <Contact /> */}
       {/* <Insta /> */}
       <Footer />
