@@ -151,7 +151,6 @@ export default function Serie() {
                       className='rounded-md bg-[#3772ff] px-5 py-2 text-white transition-colors hover:bg-[#2855c7]'
                     >
                       Direcionamento
-                      <img src='/pdf.png' alt='' />
                     </a>
                   )}
                   {selectedSlide.photosUrl && (
