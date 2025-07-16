@@ -76,11 +76,13 @@ export default function Highlights() {
     <div className='bg-[#fcfcfc] relative' id='Eventos'>
       {/* título */}
       <div className='flex justify-center'>
-        <p className='text-[80px] font-ozikB mt-10 text-[#030303]'>Eventos</p>
+        <p className='mt-4 lg:text-7xl md:text-4xl text-2xl font-ozikB text-[#030303] leading-[55.02px] text-center'>
+          Eventos
+        </p>
       </div>
 
       {/* subtítulo / descrição (opcional) */}
-      <div className='flex justify-center text-center p-5'>
+      <div className='flex justify-center text-center pb-5'>
         <p className='text-lg font-outfitregular font-bold text-gray-800'>
           Acompanhe aqui todos os nossos eventos.
         </p>

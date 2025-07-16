@@ -77,9 +77,11 @@ export default function Serie() {
     <div className='bg-gray-100' id='Serie'>
       {/* título e subtítulo ------------------------------------------------ */}
       <div className='flex justify-center'>
-        <p className='mt-10 text-[80px] font-ozikB text-[#030303]'>Séries</p>
+        <p className='mt-4 lg:text-7xl md:text-4xl text-2xl font-ozikB text-[#030303] leading-[55.02px] text-center'>
+          Séries
+        </p>
       </div>
-      <div className='flex justify-center p-5 text-center font-outfitregular text-lg font-bold text-gray-800'>
+      <div className='flex justify-center pb-5 text-center font-outfitregular text-lg font-bold text-gray-800'>
         <p>Todas as séries do movimento Aviva e seu direcionamento.</p>
       </div>
 
