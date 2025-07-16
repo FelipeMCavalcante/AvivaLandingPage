@@ -8,7 +8,7 @@ export default function Us() {
           QUEM SOMOS NÓS?
         </p>
       </div>
-      <div className='flex justify-center p-5 text-center font-outfitregular text-md md:text-lg lg:text-2xl font-bold text-gray-800'>
+      <div className='flex justify-center p-5 text-center font-outfitregular text-sm md:text-lg lg:text-2xl font-bold text-gray-800'>
         <p>
           O Aviva é um movimento católico de evangelização que nasceu no coração
           da juventude da Paróquia Nossa Senhora da Glória (Fortaleza-CE). Nosso
