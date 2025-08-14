@@ -48,7 +48,7 @@ export default function Hero() {
       <div className='flex flex-col items-center px-4 py-6'>
         <button
           onClick={handleCopy}
-          className='block w-full max-w-xs text-center bg-[#3772ff] hover:bg-[#2855c7] text-white font-outfitregular font-bold text-xl py-5 px-8 rounded-2xl shadow-xl transition-transform hover:scale-105'
+          className='block w-full max-w-xs text-center bg-[#3772ff] hover:bg-[#2855c7] text-white font-neueBold text-xl py-5 px-8 rounded-2xl shadow-xl transition-transform hover:scale-105'
         >
           Copiar chave Pix
         </button>

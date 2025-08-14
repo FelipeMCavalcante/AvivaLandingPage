@@ -54,21 +54,9 @@ export default function Highlights() {
   const SLIDES: Slide[] = [
     {
       src: '/imgEventos/aviva-camp.png',
-      title: 'AVIVACAMP',
+      title: 'AVIVAMENTO',
       description: '',
       link: 'https://drive.google.com/drive/folders/1DZVcE5SnhNEj8kfyFg0WVoIwb6QMiI23?usp=sharing',
-    },
-    {
-      src: '/imgEventos/forrozim.png',
-      title: 'FORROZIM',
-      description: '',
-      link: 'https://www.e-inscricao.com/paroquia-nossa-senhora-da-gloria/forrozim2025?fbclid=PAQ0xDSwLDx8VleHRuA2FlbQIxMQABp5ewi0KrjQ2UHSfvXDh8qltPISBHnPU33O81cNWW2zSwY3nsnNC-hgIoPIEx_aem_aWQK2hi5Z1A1dE7U4mEa_Q', // link exclusivo
-    },
-    {
-      src: '/imgEventos/festa-da-padroeira.png',
-      title: 'FESTA DA PADROEIRA',
-      description: '',
-      link: 'https://www.instagram.com/p/DLaXceOOKEq/?utm_source=ig_web_copy_link&igsh=MTYwOWExZWQ0OXRtMw==',
     },
   ];
 
@@ -76,14 +64,14 @@ export default function Highlights() {
     <div className='bg-[#fcfcfc] relative' id='Eventos'>
       {/* título */}
       <div className='flex justify-center'>
-        <p className='mt-4 lg:text-7xl md:text-4xl text-4xl font-ozikB text-[#030303] leading-[55.02px] text-center'>
+        <p className='mt-4 lg:text-7xl md:text-4xl text-4xl font-neueBold text-[#030303] leading-[55.02px] text-center'>
           Eventos
         </p>
       </div>
 
       {/* subtítulo / descrição (opcional) */}
       <div className='flex justify-center text-center pb-5'>
-        <p className='text-lg font-outfitregular font-bold text-gray-800'>
+        <p className='text-lg font-neuelight text-gray-800'>
           Acompanhe aqui todos os nossos eventos.
         </p>
       </div>

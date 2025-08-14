@@ -61,9 +61,20 @@ export default function Header() {
                 </a>
               </div>
 
-              <div className='hidden lg:ml-6 lg:block w-full mb-4'>
-                {/* -------- Ícones sociais (mantido o mesmo bloco) -------- */}
-                <div className='flex justify-end mr-20 space-x-4 py-3'>
+              <div className='hidden lg:ml-6 lg:block w-full'>
+                <div className='flex h-full items-center ml-20 justify-around  font-neueBold'>
+                  {NAVIGATION.map((item) => (
+                    <a
+                      key={item.name}
+                      href={item.href}
+                      onClick={() => handleLinkClick(item.href)}
+                      className={`uppercase font-neueLight text-[#00121C] hover:text-[#3871FE] hover:font-neueBold transition-colors ${
+                        currentPath === item.href ? '' : ''
+                      }`}
+                    >
+                      {item.name}
+                    </a>
+                  ))}
                   <div>
                     <a
                       href='https://www.instagram.com/aviva.gloria/'
@@ -128,22 +139,6 @@ export default function Header() {
                     </a>
                   </div>
                 </div>
-
-                {/* -------- Links de navegação (bloco original) -------- */}
-                <div className='flex h-full items-center ml-20 justify-around mt-[-10px] font-ozikBold'>
-                  {NAVIGATION.map((item) => (
-                    <a
-                      key={item.name}
-                      href={item.href}
-                      onClick={() => handleLinkClick(item.href)}
-                      className={`uppercase font-proximanova text-[#00121C] hover:text-[#3871FE] transition-colors ${
-                        currentPath === item.href ? 'font-semibold' : ''
-                      }`}
-                    >
-                      {item.name}
-                    </a>
-                  ))}
-                </div>
               </div>
 
               {/* ---------- Botão hamburguer (mobile) ---------- */}
@@ -169,7 +164,7 @@ export default function Header() {
                   as='a'
                   href={item.href}
                   onClick={() => handleLinkClick(item.href)}
-                  className={`block rounded-md px-3 py-2 text-base font-medium uppercase ${
+                  className={`block rounded-md px-3 py-2 text-base font-neueBold font-bold uppercase ${
                     currentPath === item.href
                       ? 'bg-gray-900 text-white'
                       : 'text-gray-800 hover:bg-gray-700 hover:text-white'

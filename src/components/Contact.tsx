@@ -28,7 +28,7 @@ export default function Contact({
           <h1 className='text-[#030303] text-[70px] font-bold font-ozikB leading-[55.02px] tracking-[4.20px]'>
             Grupo do WhatsApp
           </h1>
-          <p className='mt-2 text-[#030303] font-outfitregular font-bold text-2xl'>
+          <p className='mt-2 text-[#030303] font-neueBold text-2xl'>
             Fique por dentro de todos os avisos
             <br /> dos nossos eventos e encontros.
           </p>

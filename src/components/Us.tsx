@@ -4,11 +4,11 @@ export default function Us() {
   return (
     <div className='bg-white p-8' id='Us'>
       <div className='flex justify-center'>
-        <p className='mt-10 lg:text-7xl md:text-4xl text-4xl font-ozikB text-[#030303] leading-[55.02px] text-center'>
-          QUEM SOMOS NÓS?
+        <p className='mt-10 lg:text-7xl md:text-4xl text-4xl font-neueBold text-[#030303] leading-[55.02px] text-center'>
+          MOVIMENTO
         </p>
       </div>
-      <div className='flex justify-center p-5 text-center font-outfitregular text-sm md:text-lg lg:text-2xl font-bold text-gray-800'>
+      <div className='flex justify-center p-5 text-center font-neuelight text-sm md:text-lg lg:text-2xl text-gray-800'>
         <p>
           O Aviva é um movimento católico de evangelização que nasceu no coração
           da juventude da Paróquia Nossa Senhora da Glória (Fortaleza-CE). Nosso

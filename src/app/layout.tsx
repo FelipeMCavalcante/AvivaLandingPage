@@ -17,9 +17,15 @@ const ozikBold = localFont({
   src: '../../src/fonts/OZIK-Bold.otf',
   variable: '--font-ozikBold',
 });
-const outfitregular = localFont({
-  src: '../../src/fonts/Outfit-Regular.ttf',
-  variable: '--font-outfitregular',
+
+const neueMachinaBold = localFont({
+  src: '../../src/fonts/NeueMachina-Bold.ttf',
+  variable: '--font-neueMachinaBold',
+});
+
+const neueMachinaLight = localFont({
+  src: '../../src/fonts/NeueMachina-Light.otf',
+  variable: '--font-neueMachinaLight',
 });
 
 export const metadata: Metadata = {
@@ -35,7 +41,13 @@ export default function RootLayout({
   return (
     <html lang='en'>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} ${ozikBold.variable} ${outfitregular.variable}`}
+        className={[
+          geistSans.variable,
+          geistMono.variable,
+          ozikBold.variable,
+          neueMachinaBold.variable,
+          neueMachinaLight.variable,
+        ].join(' ')}
       >
         {children}
       </body>

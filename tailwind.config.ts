@@ -13,8 +13,8 @@ export default {
         foreground: 'var(--foreground)',
       },
       fontFamily: {
-        ozikB: ['var(--font-ozikBold)'],
-        outfitregular: ['var(--font-outfitregular)'],
+        neueBold: ['var(--font-neueMachinaBold)'],
+        neueLight: ['var(--font-neueMachinaLight)'],
       },
       animation: {
         wave: 'wave-text 3s infinite linear',
