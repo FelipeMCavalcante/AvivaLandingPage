@@ -64,7 +64,7 @@ export default function Serie() {
       src: '/imgSerie/serie-familia.png',
       hoverSrc: '/imgEvents/serie-familia.png',
       title: 'FAMÍLIA',
-      pdfUrl: '/movimento-aviva-naotenhamedo.pdf',
+      pdfUrl: '/movimento-aviva-familia.pdf',
       photosUrl: '',
       playlistUrl: '',
     },
