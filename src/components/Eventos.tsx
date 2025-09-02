@@ -53,8 +53,14 @@ export default function Highlights() {
   /* seus slides de evento */
   const SLIDES: Slide[] = [
     {
-      src: '/imgEventos/aviva-camp.png',
+      src: '/imgEventos/avivamento.png',
       title: 'AVIVAMENTO',
+      description: '',
+      link: 'https://www.e-inscricao.com/paroquia-nossa-senhora-da-gloria/avivamento-2025',
+    },
+    {
+      src: '/imgEventos/aviva-camp.png',
+      title: 'AVIVA CAMP 2025',
       description: '',
       link: 'https://drive.google.com/drive/folders/1DZVcE5SnhNEj8kfyFg0WVoIwb6QMiI23?usp=sharing',
     },

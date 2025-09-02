@@ -60,6 +60,14 @@ export default function Serie() {
         'https://drive.google.com/drive/folders/1sbzxLMg-v_tVD-uscAIBHKzvylnArPmO?usp=sharing',
       playlistUrl: 'https://open.spotify.com/playlist/1V3iwsRwdZAh6pYi710GMO',
     },
+    {
+      src: '/imgSerie/serie-familia.png',
+      hoverSrc: '/imgEvents/serie-familia.png',
+      title: 'FAMÍLIA',
+      pdfUrl: '/movimento-aviva-naotenhamedo.pdf',
+      photosUrl: '',
+      playlistUrl: '',
+    },
   ];
 
   const [selectedSlide, setSelectedSlide] = useState<Slide | null>(null);
@@ -200,18 +208,18 @@ const EmblaCarousel = ({
 
       {/* track */}
       <div className='w-auto overflow-hidden px-4' ref={emblaRef}>
-        <div className='flex'>
+        <div className='flex items-stretch'>
           {slides.map((slide, index) => (
             <div
               key={index}
               className='group flex-[0_0_80%] cursor-pointer px-2 md:flex-[0_0_50%] lg:flex-[0_0_25%]'
               onClick={() => onSlideClick(index)}
             >
-              <div className='relative w-auto overflow-hidden rounded-lg bg-gray-100 shadow-md'>
+              <div className='relative w-full h-72 md:h-80 lg:h-96 overflow-hidden rounded-lg bg-gray-100 shadow-md'>
                 <img
                   src={slide.src}
                   alt={slide.title}
-                  className='w-full object-cover transition-opacity duration-300'
+                  className='h-full w-full object-cover transition-opacity duration-300'
                 />
               </div>
             </div>
