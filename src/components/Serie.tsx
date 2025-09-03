@@ -65,7 +65,8 @@ export default function Serie() {
       hoverSrc: '/imgEvents/serie-familia.png',
       title: 'FAMÍLIA',
       pdfUrl: '/movimento-aviva-familia.pdf',
-      photosUrl: '',
+      photosUrl:
+        'https://drive.google.com/drive/folders/1vlNMnIdh8P7gF_FBWWMMQ6tQdAAX216H?usp=sharing',
       playlistUrl: '',
     },
   ];
