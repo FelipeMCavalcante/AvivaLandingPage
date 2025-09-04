@@ -53,8 +53,7 @@ O AVIVAMENTO COMEÇOU!!`,
     {
       src: '/imgEventos/aviva-camp.png',
       title: 'Aviva Camp 2025',
-      description:
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed mattis est elit, sed facilisis enim lobortis. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed mattis est elit, sed facilisis enim lobortis.',
+      description: '',
       link: 'https://drive.google.com/drive/folders/1DZVcE5SnhNEj8kfyFg0WVoIwb6QMiI23?usp=sharing',
     },
   ];
