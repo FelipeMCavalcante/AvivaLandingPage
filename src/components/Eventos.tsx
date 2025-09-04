@@ -41,8 +41,13 @@ export default function Eventos() {
     {
       src: '/imgEventos/avivamento.png',
       title: 'Avivamento',
-      description:
-        'O Avivamento é um tempo de promessa cumprida. É quando nos reunimos para permitir que o Espírito Santo reacenda em nós o fogo da fé, cure feridas, desperte carismas e nos impulsione à santidade. Em 2025, acontecerá nos dias 6 e 7 de dezembro, no Centro Universitário UNI7, em Fortaleza. Serão dois dias de profundo louvor, formação e adoração - o transbordar do que é o Aviva em cada um dos nossos encontros. É tempo de viver o novo de Deus (de novo e de novo). O AVIVAMENTO COMEÇOU!!',
+      description: `O Avivamento é um tempo de promessa cumprida. É quando nos reunimos para permitir que o Espírito Santo reacenda em nós o fogo da fé, cure feridas, desperte carismas e nos impulsione à santidade.
+
+Em 2025, acontecerá nos dias 6 e 7 de dezembro, no Centro Universitário UNI7, em Fortaleza. Serão dois dias de profundo louvor, formação e adoração - o transbordar do que é o Aviva em cada um dos nossos encontros.
+
+É tempo de viver o novo de Deus (de novo e de novo).
+
+O AVIVAMENTO COMEÇOU!!`,
       link: 'https://www.e-inscricao.com/paroquia-nossa-senhora-da-gloria/avivamento-2025',
     },
     {
@@ -122,7 +127,7 @@ const EmblaCarousel = ({ slides, options }: EmblaCarouselProps) => {
                     <h3 className='text-2xl sm:text-3xl md:text-4xl font-neueBold text-black mb-4 text-center sm:text-left'>
                       {slide.title}
                     </h3>
-                    <p className='text-gray-700 mb-5 sm:mb-6 leading-relaxed font-neueLight text-sm sm:text-base text-center sm:text-left'>
+                    <p className='text-gray-700 mb-5 sm:mb-6 leading-relaxed font-neueLight text-sm sm:text-base text-center sm:text-left whitespace-pre-line'>
                       {slide.description}
                     </p>
                     <div className='text-center md:text-left'>
