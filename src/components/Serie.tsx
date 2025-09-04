@@ -90,7 +90,7 @@ export default function Serie() {
           Séries
         </p>
       </div>
-      <div className='flex justify-center pb-5 text-center font-neuelight text-lg text-gray-800'>
+      <div className='flex justify-center pb-5 text-center font-neueLight text-lg text-gray-800'>
         <p>Todas as séries do movimento Aviva e seu direcionamento.</p>
       </div>
 
