@@ -42,7 +42,7 @@ export default function Eventos() {
       src: '/imgEventos/avivamento.png',
       title: 'Avivamento',
       description:
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed mattis est elit, sed facilisis enim lobortis. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed mattis est elit, sed facilisis enim lobortis.',
+        'O Avivamento é um tempo de promessa cumprida. É quando nos reunimos para permitir que o Espírito Santo reacenda em nós o fogo da fé, cure feridas, desperte carismas e nos impulsione à santidade. Em 2025, acontecerá nos dias 6 e 7 de dezembro, no Centro Universitário UNI7, em Fortaleza. Serão dois dias de profundo louvor, formação e adoração - o transbordar do que é o Aviva em cada um dos nossos encontros. É tempo de viver o novo de Deus (de novo e de novo). O AVIVAMENTO COMEÇOU!!',
       link: 'https://www.e-inscricao.com/paroquia-nossa-senhora-da-gloria/avivamento-2025',
     },
     {
