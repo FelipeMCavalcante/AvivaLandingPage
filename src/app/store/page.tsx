@@ -25,7 +25,7 @@ const products: Product[] = [
     name: 'Camisa Aviva Branca',
     description: 'Modelo clássico branco com logo Aviva estampado.',
     price: 49.9,
-    image: '/camisa-branca.jpg',
+    image: '/imgLoja/camisa-pio-marrom.jpg',
     type: 'roupa',
   },
   {
@@ -33,7 +33,7 @@ const products: Product[] = [
     name: 'Camisa Aviva Azul',
     description: 'Edição especial azul com detalhes modernos.',
     price: 49.9,
-    image: '/camisa-azul.jpg',
+    image: '/imgLoja/camisa-pio-marrom.jpg',
     type: 'roupa',
   },
   {
@@ -41,7 +41,7 @@ const products: Product[] = [
     name: 'Caneca Aviva',
     description: 'Caneca oficial do Aviva feita em cerâmica.',
     price: 29.9,
-    image: '/caneca.jpg',
+    image: '/imgLoja/camisa-pio-marrom.jpg',
     type: 'acessorio',
   },
 ];
@@ -126,8 +126,8 @@ export default function StorePage() {
 
             {cart.map((item, i) => (
               <div
-                key={`${item.id}-${i}`}
-                className='flex justify-between items-center border-b py-2'
+                key={`${item.id} - ${i}`}
+                className='flex justify-between items-center border-b py-2 text-[#1D5176]'
               >
                 <p>
                   {item.name}
@@ -136,14 +136,14 @@ export default function StorePage() {
                       ({item.size})
                     </span>
                   )}{' '}
-                  —{' '}
+                  -{' '}
                   <span className='text-yellow-600 font-medium'>
                     R$ {item.price.toFixed(2)}
                   </span>
                 </p>
                 <button
                   onClick={() => removeFromCart(i)}
-                  className='text-red-500 text-sm hover:underline'
+                  className='text-red-500 text-sm hover:underline font-bold'
                 >
                   remover
                 </button>
@@ -151,7 +151,7 @@ export default function StorePage() {
             ))}
 
             <div className='text-right mt-4'>
-              <p className='text-lg font-semibold'>
+              <p className='text-lg font-semibold text-blue-600'>
                 Total:{' '}
                 <span className='text-yellow-600'>R$ {total.toFixed(2)}</span>
               </p>
@@ -271,7 +271,7 @@ function PaymentModal({
         </h2>
 
         <img
-          src='/pix.png'
+          src='/qr-pix.png'
           alt='QR Code Pix'
           className='mx-auto mb-4 w-48 h-48 object-contain'
         />
@@ -284,7 +284,8 @@ function PaymentModal({
         </p>
 
         <p className='text-gray-600 mb-6 text-sm'>
-          *Seu pedido será produzido e enviado após a confirmação do pagamento.*
+          Seu pedido será produzido e enviado após a confirmação do pagamento.
+          Envie para o vendedor pelo botão abaixo.
         </p>
 
         <a
