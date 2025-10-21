@@ -69,6 +69,14 @@ export default function Serie() {
         'https://drive.google.com/drive/folders/1vlNMnIdh8P7gF_FBWWMMQ6tQdAAX216H?usp=sharing',
       playlistUrl: '',
     },
+    {
+      src: '/imgSerie/totus.png',
+      hoverSrc: '/imgSerie/totus.png',
+      title: 'TOTUS TUUS MARIAE',
+      pdfUrl: '/movimento-aviva-totus-tuus.pdf',
+      photosUrl: '',
+      playlistUrl: '',
+    },
   ];
 
   const [selectedSlide, setSelectedSlide] = useState<Slide | null>(null);
