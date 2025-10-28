@@ -75,7 +75,7 @@ export default function Serie() {
       title: 'TOTUS TUUS MARIAE',
       pdfUrl: '/movimento-aviva-totus-tuus-mariae.pdf',
       photosUrl: '',
-      playlistUrl: '',
+      playlistUrl: 'https://open.spotify.com/playlist/6rl0ImjIAySCvOuNQekMfN',
     },
   ];
 
