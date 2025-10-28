@@ -67,7 +67,7 @@ export default function Serie() {
       pdfUrl: '/movimento-aviva-familia.pdf',
       photosUrl:
         'https://drive.google.com/drive/folders/1vlNMnIdh8P7gF_FBWWMMQ6tQdAAX216H?usp=sharing',
-      playlistUrl: '',
+      playlistUrl: 'https://open.spotify.com/playlist/73mHOlO5jFbpqRofRJN0pt',
     },
     {
       src: '/imgSerie/totus.png',
