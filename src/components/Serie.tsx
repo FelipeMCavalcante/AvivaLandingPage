@@ -73,7 +73,7 @@ export default function Serie() {
       src: '/imgSerie/totus.png',
       hoverSrc: '/imgSerie/totus.png',
       title: 'TOTUS TUUS MARIAE',
-      pdfUrl: '/movimento-aviva-totus-tuus.pdf',
+      pdfUrl: '/movimento-aviva-totus-tuus-mariae.pdf',
       photosUrl: '',
       playlistUrl: '',
     },
