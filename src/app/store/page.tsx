@@ -298,7 +298,6 @@ export default function StorePage() {
         </div>
       </header>
 
-      {/* ───────── CONTEÚDO ───────── */}
       <div className='px-6 py-12 md:px-24'>
         <h2 className='text-3xl font-extrabold text-[#1D5176] mb-8 text-center'>
           Loja Aviva
