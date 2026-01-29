@@ -1,38 +1,33 @@
 'use client';
 
 import { useState } from 'react';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { supabase } from '@/lib/supabaseClient';
 
-export default function RegisterPage() {
+export default function LoginClient() {
   const router = useRouter();
+  const search = useSearchParams();
+  const from = search.get('from') ?? 'store';
 
-  const [name, setName] = useState('');
-  const [phone, setPhone] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-
   const [loading, setLoading] = useState(false);
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
 
-  const register = async () => {
+  const login = async () => {
     setLoading(true);
     setErrorMsg(null);
 
     try {
-      const { error } = await supabase.auth.signUp({
+      const { error } = await supabase.auth.signInWithPassword({
         email,
         password,
-        options: {
-          data: { name, phone },
-        },
       });
       if (error) throw error;
 
-      router.replace('/store');
+      router.replace(from === 'admin' ? '/admin' : '/store');
     } catch (e: unknown) {
-      const msg =
-        (e as { message?: string })?.message ?? 'Erro ao criar conta.';
+      const msg = (e as { message?: string })?.message ?? 'Erro ao fazer login.';
       setErrorMsg(msg);
     } finally {
       setLoading(false);
@@ -42,8 +37,8 @@ export default function RegisterPage() {
   return (
     <section className="min-h-screen bg-[#F8F8F8] flex items-center justify-center px-4">
       <div className="bg-white rounded-2xl shadow p-6 w-full max-w-sm">
-        <h1 className="text-2xl font-extrabold text-[#1D5176]">Criar conta</h1>
-        <p className="text-sm text-gray-600 mt-1">Cadastre-se para comprar.</p>
+        <h1 className="text-2xl font-extrabold text-[#1D5176]">Login</h1>
+        <p className="text-sm text-gray-600 mt-1">Acesse sua conta.</p>
 
         {errorMsg && (
           <div className="mt-4 bg-red-50 border border-red-200 text-red-700 rounded-xl p-3 text-sm">
@@ -52,18 +47,6 @@ export default function RegisterPage() {
         )}
 
         <div className="mt-5 grid gap-3">
-          <input
-            className="border rounded-xl p-3 outline-none"
-            placeholder="Nome"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-          />
-          <input
-            className="border rounded-xl p-3 outline-none"
-            placeholder="Telefone"
-            value={phone}
-            onChange={(e) => setPhone(e.target.value)}
-          />
           <input
             className="border rounded-xl p-3 outline-none"
             placeholder="E-mail"
@@ -79,18 +62,18 @@ export default function RegisterPage() {
           />
 
           <button
-            onClick={register}
+            onClick={login}
             disabled={loading}
             className="bg-yellow-500 hover:bg-yellow-600 text-white py-3 rounded-xl font-extrabold disabled:opacity-60"
           >
-            {loading ? 'Criando...' : 'Criar conta'}
+            {loading ? 'Entrando...' : 'Entrar'}
           </button>
 
           <button
-            onClick={() => router.push('/login')}
+            onClick={() => router.push('/register')}
             className="border border-gray-200 hover:bg-gray-50 text-gray-700 py-3 rounded-xl font-extrabold"
           >
-            Já tenho conta
+            Criar conta
           </button>
         </div>
       </div>

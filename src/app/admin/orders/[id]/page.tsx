@@ -1,138 +1,269 @@
 'use client';
 
-import { useEffect, useState } from 'react';
-import { useParams } from 'next/navigation';
+import { useCallback, useEffect, useMemo, useState } from 'react';
+import Link from 'next/link';
+import { useParams, useRouter } from 'next/navigation';
 import { supabase } from '@/lib/supabaseClient';
+import type { Order, OrderItem } from '@/app/_types/shop';
 
-type OrderStatus =
-  | 'aguardando comprovante'
-  | 'em separação'
-  | 'pronto'
-  | 'entregue'
-  | 'cancelado';
+type Row = Record<string, unknown>;
 
-type OrderRow = {
-  id: string;
-  created_at: string;
-  total: number;
-  status: OrderStatus;
-  items: any[];
-  user_id: string;
-  customer_name: string;
-  customer_phone: string | null;
-};
+function asString(v: unknown, fallback = ''): string {
+  return typeof v === 'string' ? v : fallback;
+}
+function asNumber(v: unknown, fallback = 0): number {
+  return typeof v === 'number' ? v : Number(v ?? fallback) || fallback;
+}
+function asNullableString(v: unknown): string | null {
+  return v === null ? null : typeof v === 'string' ? v : null;
+}
+function asItems(v: unknown): OrderItem[] {
+  if (!Array.isArray(v)) return [];
+  return v.map((it) => {
+    const r = (it ?? {}) as Row;
+    return {
+      id: asString(r.id),
+      name: asString(r.name),
+      price: asNumber(r.price),
+      size: typeof r.size === 'string' ? r.size : null,
+    };
+  });
+}
+function normalizeOrder(row: Row): Order {
+  return {
+    id: asString(row.id),
+    created_at: asString(row.created_at),
+    total: asNumber(row.total),
+    status: asString(row.status, 'aguardando comprovante'),
+    customer_name: asString(row.customer_name, 'Cliente'),
+    customer_phone: asNullableString(row.customer_phone),
+    items: asItems(row.items),
+  };
+}
 
-const STATUS: OrderStatus[] = [
+const STATUS_OPTIONS = [
   'aguardando comprovante',
   'em separação',
-  'pronto',
+  'pronto para retirada',
   'entregue',
   'cancelado',
-];
+] as const;
 
-export default function AdminOrderDetailPage() {
+export default function AdminOrderDetailsPage() {
+  const router = useRouter();
   const params = useParams<{ id: string }>();
-  const id = params.id;
+  const id = params?.id;
 
-  const [order, setOrder] = useState<OrderRow | null>(null);
   const [loading, setLoading] = useState(true);
+  const [order, setOrder] = useState<Order | null>(null);
+  const [errorMsg, setErrorMsg] = useState<string | null>(null);
 
-  const load = async () => {
+  const load = useCallback(async () => {
+    if (!id) return;
+
     setLoading(true);
-    const { data, error } = await supabase
-      .from('orders')
-      .select('id, created_at, total, status, items, user_id, customer_name, customer_phone')
-      .eq('id', id)
-      .single();
+    setErrorMsg(null);
 
-    if (!error) setOrder(data as OrderRow);
-    setLoading(false);
-  };
+    try {
+      const res = await supabase
+        .from('orders')
+        .select('id,created_at,total,status,customer_name,customer_phone,items')
+        .eq('id', id)
+        .single();
 
-  useEffect(() => {
-    load();
+      if (res.error) throw res.error;
+
+      const row = res.data as unknown as Row;
+      setOrder(normalizeOrder(row));
+    } catch (e: unknown) {
+      const msg =
+        (e as { message?: string })?.message ?? 'Erro ao carregar o pedido.';
+      setErrorMsg(msg);
+      setOrder(null);
+    } finally {
+      setLoading(false);
+    }
   }, [id]);
 
-  const updateStatus = async (status: OrderStatus) => {
-    await supabase.from('orders').update({ status }).eq('id', id);
-    await load();
+  useEffect(() => {
+    void load();
+  }, [load]);
+
+  const itemsTotal = useMemo(() => {
+    if (!order) return 0;
+    return (order.items ?? []).reduce((acc, it) => acc + (it.price || 0), 0);
+  }, [order]);
+
+  const updateStatus = async (status: string) => {
+    if (!order) return;
+
+    const prev = order;
+    setOrder({ ...order, status });
+
+    const { error } = await supabase
+      .from('orders')
+      .update({ status })
+      .eq('id', order.id);
+
+    if (error) {
+      setOrder(prev);
+      alert('Erro ao atualizar status: ' + error.message);
+    }
   };
 
-  if (loading) return <p className="text-gray-600">Carregando...</p>;
-  if (!order) return <p className="text-gray-600">Pedido não encontrado.</p>;
+  const openWhatsapp = () => {
+    if (!order?.customer_phone) return;
+    const phone = order.customer_phone.replace(/\D/g, '');
+    const msg = encodeURIComponent(
+      `Olá, ${order.customer_name}! Seu pedido está com status: ${order.status}.`
+    );
+    window.open(`https://wa.me/${phone}?text=${msg}`, '_blank', 'noopener,noreferrer');
+  };
 
   return (
-    <div className="bg-white rounded-2xl shadow p-6">
-      <div className="flex items-center justify-between gap-3 mb-6">
+    <section className="min-h-screen bg-[#F8F8F8]">
+      <header className="bg-white shadow-sm px-6 py-4 flex items-center justify-between">
         <div>
-          <h2 className="text-xl font-extrabold text-[#1D5176]">Pedido</h2>
-          <p className="text-xs text-gray-500">ID: {order.id}</p>
+          <h1 className="text-2xl font-extrabold text-[#1D5176]">
+            Pedido (Admin)
+          </h1>
+          <p className="text-sm text-gray-600">Detalhes do pedido.</p>
         </div>
 
-        <a href="/admin/orders" className="text-[#1D5176] hover:underline font-semibold">
-          Voltar
-        </a>
-      </div>
-
-      <div className="grid gap-3 md:grid-cols-2">
-        <div className="border rounded-xl p-4">
-          <p className="text-gray-500 text-sm">Cliente</p>
-          <p className="text-[#1D5176] font-bold">{order.customer_name}</p>
-          <p className="text-gray-600 text-sm">{order.customer_phone ?? '—'}</p>
-        </div>
-
-        <div className="border rounded-xl p-4">
-          <p className="text-gray-500 text-sm">Data</p>
-          <p className="text-[#1D5176] font-bold">
-            {new Date(order.created_at).toLocaleString('pt-BR')}
-          </p>
-        </div>
-
-        <div className="border rounded-xl p-4">
-          <p className="text-gray-500 text-sm">Total</p>
-          <p className="text-yellow-700 font-extrabold text-lg">
-            R$ {Number(order.total).toFixed(2)}
-          </p>
-        </div>
-
-        <div className="border rounded-xl p-4">
-          <p className="text-gray-500 text-sm">Status</p>
-          <select
-            value={order.status}
-            onChange={(e) => updateStatus(e.target.value as OrderStatus)}
-            className="mt-1 border rounded-lg px-3 py-2 text-black w-full"
+        <div className="flex gap-2">
+          <Link
+            href="/admin/orders"
+            className="px-4 py-2 rounded-xl border border-gray-200 hover:bg-gray-50 text-gray-700 font-semibold"
           >
-            {STATUS.map((s) => (
-              <option key={s} value={s}>
-                {s}
-              </option>
-            ))}
-          </select>
-        </div>
-      </div>
+            Voltar
+          </Link>
 
-      <div className="mt-6 border rounded-xl p-4">
-        <p className="text-[#1D5176] font-bold mb-3">Itens</p>
-        {order.items?.length ? (
-          <div className="space-y-2">
-            {order.items.map((i: any, idx: number) => (
-              <div key={idx} className="flex items-center justify-between border-b py-2">
-                <div>
-                  <p className="text-[#1D5176] font-semibold">
-                    {i.name} {i.size ? <span className="text-gray-500 text-sm">({i.size})</span> : null}
-                  </p>
-                  <p className="text-gray-500 text-xs">{i.type ?? ''}</p>
-                </div>
-                <p className="text-yellow-700 font-semibold">
-                  R$ {Number(i.price).toFixed(2)}
-                </p>
-              </div>
-            ))}
+          <button
+            onClick={() => router.push('/admin')}
+            className="px-4 py-2 rounded-xl border border-gray-200 hover:bg-gray-50 text-gray-700 font-semibold"
+          >
+            Admin Home
+          </button>
+        </div>
+      </header>
+
+      <div className="px-6 py-8 md:px-16 space-y-6">
+        {errorMsg && (
+          <div className="bg-red-50 border border-red-200 text-red-700 rounded-2xl p-4">
+            {errorMsg}
+          </div>
+        )}
+
+        {loading ? (
+          <div className="bg-white rounded-2xl shadow p-6 text-gray-600">
+            Carregando...
+          </div>
+        ) : !order ? (
+          <div className="bg-white rounded-2xl shadow p-6 text-gray-600">
+            Pedido não encontrado.
           </div>
         ) : (
-          <p className="text-gray-600">—</p>
+          <>
+            <div className="bg-white rounded-2xl shadow p-6">
+              <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+                <div>
+                  <p className="text-sm text-gray-600">Cliente</p>
+                  <p className="text-xl font-extrabold text-[#1D5176]">
+                    {order.customer_name}
+                  </p>
+                  <p className="text-sm text-gray-600 mt-1">
+                    {new Date(order.created_at).toLocaleString('pt-BR')}
+                  </p>
+                </div>
+
+                <div className="text-right">
+                  <p className="text-sm text-gray-600">Total</p>
+                  <p className="text-2xl font-extrabold text-yellow-600">
+                    R$ {order.total.toFixed(2)}
+                  </p>
+                  <p className="text-xs text-gray-500">
+                    Soma itens: R$ {itemsTotal.toFixed(2)}
+                  </p>
+                </div>
+              </div>
+
+              <div className="mt-5 flex flex-col sm:flex-row gap-3 sm:items-center sm:justify-between">
+                <div className="flex items-center gap-2">
+                  <span className="text-sm font-semibold text-[#1D5176]">
+                    Status:
+                  </span>
+                  <select
+                    value={order.status}
+                    onChange={(e) => updateStatus(e.target.value)}
+                    className="border rounded-xl p-2 text-sm"
+                  >
+                    {STATUS_OPTIONS.map((s) => (
+                      <option key={s} value={s}>
+                        {s}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+
+                <div className="flex gap-2">
+                  {order.customer_phone && (
+                    <button
+                      onClick={openWhatsapp}
+                      className="px-4 py-2 rounded-xl bg-green-600 hover:bg-green-700 text-white font-extrabold"
+                    >
+                      WhatsApp
+                    </button>
+                  )}
+                  <button
+                    onClick={load}
+                    className="px-4 py-2 rounded-xl bg-yellow-500 hover:bg-yellow-600 text-white font-extrabold"
+                  >
+                    Recarregar
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <div className="bg-white rounded-2xl shadow p-6">
+              <h2 className="text-lg font-extrabold text-[#1D5176] mb-4">
+                Itens
+              </h2>
+
+              {order.items.length === 0 ? (
+                <p className="text-gray-600">Sem itens.</p>
+              ) : (
+                <div className="space-y-3">
+                  {order.items.map((it, idx) => (
+                    <div
+                      key={`${it.id}-${idx}`}
+                      className="border rounded-xl p-4 flex justify-between items-center"
+                    >
+                      <div>
+                        <p className="font-extrabold text-[#1D5176]">
+                          {it.name}
+                          {it.size ? (
+                            <span className="text-xs text-gray-500 font-semibold">
+                              {' '}
+                              ({it.size})
+                            </span>
+                          ) : null}
+                        </p>
+                        <p className="text-xs text-gray-600">
+                          ID: {it.id || '—'}
+                        </p>
+                      </div>
+
+                      <div className="font-extrabold text-yellow-600">
+                        R$ {Number(it.price).toFixed(2)}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+          </>
         )}
       </div>
-    </div>
+    </section>
   );
 }

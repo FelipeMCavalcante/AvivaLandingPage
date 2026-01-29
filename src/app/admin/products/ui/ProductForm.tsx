@@ -1,128 +1,101 @@
 'use client';
 
-import { useMemo, useState } from 'react';
-import { supabase } from '@/lib/supabaseClient';
-import type { ProductRow } from '../[id]/page';
-
-type ProductType = 'roupa' | 'acessorio' | 'outro';
-
-const DEFAULT_SIZES = ['PP', 'P', 'M', 'G', 'GG'];
+import Link from 'next/link';
+import { useState } from 'react';
+import type { Product, ProductType } from '@/app/_types/shop';
 
 export default function ProductForm({
-  mode,
-  product,
+  initial,
+  onSubmit,
+  saving,
 }: {
-  mode: 'create' | 'edit';
-  product?: ProductRow;
+  initial?: Partial<Product>;
+  onSubmit: (payload: {
+    name: string;
+    description: string;
+    price: number;
+    type: ProductType;
+    images: string[];
+    sizes: string[] | null;
+    active: boolean;
+  }) => Promise<void>;
+  saving: boolean;
 }) {
-  const [name, setName] = useState(product?.name ?? '');
-  const [description, setDescription] = useState(product?.description ?? '');
-  const [price, setPrice] = useState(String(product?.price ?? ''));
-  const [type, setType] = useState<ProductType>((product?.type as ProductType) ?? 'roupa');
-  const [active, setActive] = useState(product?.active ?? true);
+  const [name, setName] = useState(initial?.name ?? '');
+  const [description, setDescription] = useState(initial?.description ?? '');
+  const [price, setPrice] = useState<number>(initial?.price ?? 0);
+  const [type, setType] = useState<ProductType>((initial?.type as ProductType) ?? 'outro');
+  const [imagesText, setImagesText] = useState((initial?.images ?? []).join('\n'));
+  const [sizesText, setSizesText] = useState((initial?.sizes ?? []).join('\n'));
+  const [active, setActive] = useState<boolean>(initial?.active ?? true);
 
-  // (simples) imagens via URLs (uma por linha)
-  const [imagesText, setImagesText] = useState((product?.images ?? []).join('\n'));
+  const submit = async () => {
+    const images = imagesText
+      .split('\n')
+      .map((s) => s.trim())
+      .filter(Boolean);
 
-  // tamanhos só se roupa (um por linha)
-  const [sizesText, setSizesText] = useState(
-    (product?.sizes ?? DEFAULT_SIZES).join('\n')
-  );
+    const sizesRaw = sizesText
+      .split('\n')
+      .map((s) => s.trim())
+      .filter(Boolean);
 
-  const [loading, setLoading] = useState(false);
+    const sizes = type === 'roupa' ? sizesRaw : null;
 
-  const images = useMemo(
-    () => imagesText.split('\n').map((s) => s.trim()).filter(Boolean),
-    [imagesText]
-  );
-
-  const sizes = useMemo(() => {
-    if (type !== 'roupa') return null;
-    return sizesText.split('\n').map((s) => s.trim()).filter(Boolean);
-  }, [sizesText, type]);
-
-  const save = async () => {
-    setLoading(true);
-    try {
-      if (!name.trim()) throw new Error('Nome obrigatório');
-      const priceNumber = Number(price);
-      if (Number.isNaN(priceNumber) || priceNumber <= 0) throw new Error('Preço inválido');
-      if (images.length === 0) throw new Error('Informe ao menos 1 imagem (URL)');
-
-      const payload = {
-        name: name.trim(),
-        description: description.trim(),
-        price: priceNumber,
-        type,
-        images,
-        sizes,
-        active,
-      };
-
-      if (mode === 'create') {
-        const { error } = await supabase.from('products').insert(payload);
-        if (error) throw error;
-      } else {
-        const { error } = await supabase.from('products').update(payload).eq('id', product!.id);
-        if (error) throw error;
-      }
-
-      window.location.href = '/admin/products';
-    } catch (e: any) {
-      alert(e?.message ?? 'Erro ao salvar produto');
-      console.error(e);
-    } finally {
-      setLoading(false);
-    }
+    await onSubmit({
+      name,
+      description,
+      price: Number(price),
+      type,
+      images,
+      sizes,
+      active,
+    });
   };
 
   return (
-    <div className="bg-white rounded-2xl shadow p-6 max-w-2xl">
-      <div className="flex items-center justify-between mb-6">
-        <h2 className="text-xl font-extrabold text-[#1D5176]">
-          {mode === 'create' ? 'Novo Produto' : 'Editar Produto'}
-        </h2>
-
-        <a href="/admin/products" className="text-[#1D5176] hover:underline font-semibold">
+    <div className="bg-white rounded-2xl shadow p-6">
+      <div className="flex items-center justify-between mb-5">
+        <h2 className="text-lg font-extrabold text-[#1D5176]">Produto</h2>
+        <Link href="/admin/products" className="text-sm font-semibold text-[#1D5176] hover:underline">
           Voltar
-        </a>
+        </Link>
       </div>
 
       <div className="grid gap-4">
-        <label className="text-sm font-semibold text-[#1D5176]">
-          Nome
+        <div>
+          <label className="text-sm font-semibold text-[#1D5176]">Nome</label>
           <input
-            className="mt-1 w-full border rounded-lg p-2 text-black"
+            className="mt-1 w-full border rounded-xl p-3 outline-none"
             value={name}
             onChange={(e) => setName(e.target.value)}
           />
-        </label>
+        </div>
 
-        <label className="text-sm font-semibold text-[#1D5176]">
-          Descrição
+        <div>
+          <label className="text-sm font-semibold text-[#1D5176]">Descrição</label>
           <textarea
-            className="mt-1 w-full border rounded-lg p-2 text-black"
+            className="mt-1 w-full border rounded-xl p-3 outline-none min-h-[110px]"
             value={description}
             onChange={(e) => setDescription(e.target.value)}
-            rows={4}
           />
-        </label>
+        </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          <label className="text-sm font-semibold text-[#1D5176]">
-            Preço
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div>
+            <label className="text-sm font-semibold text-[#1D5176]">Preço</label>
             <input
-              className="mt-1 w-full border rounded-lg p-2 text-black"
+              type="number"
+              className="mt-1 w-full border rounded-xl p-3 outline-none"
               value={price}
-              onChange={(e) => setPrice(e.target.value)}
-              inputMode="decimal"
+              onChange={(e) => setPrice(Number(e.target.value))}
             />
-          </label>
+          </div>
 
-          <label className="text-sm font-semibold text-[#1D5176]">
-            Tipo
+          <div>
+            <label className="text-sm font-semibold text-[#1D5176]">Tipo</label>
             <select
-              className="mt-1 w-full border rounded-lg p-2 text-black"
+              className="mt-1 w-full border rounded-xl p-3 outline-none"
               value={type}
               onChange={(e) => setType(e.target.value as ProductType)}
             >
@@ -130,51 +103,44 @@ export default function ProductForm({
               <option value="acessorio">acessorio</option>
               <option value="outro">outro</option>
             </select>
-          </label>
-
-          <label className="text-sm font-semibold text-[#1D5176]">
-            Ativo
-            <select
-              className="mt-1 w-full border rounded-lg p-2 text-black"
-              value={active ? 'true' : 'false'}
-              onChange={(e) => setActive(e.target.value === 'true')}
-            >
-              <option value="true">Sim</option>
-              <option value="false">Não</option>
-            </select>
-          </label>
+          </div>
         </div>
 
-        <label className="text-sm font-semibold text-[#1D5176]">
-          Imagens (URLs) - 1 por linha
+        <div>
+          <label className="text-sm font-semibold text-[#1D5176]">Imagens (1 URL por linha)</label>
           <textarea
-            className="mt-1 w-full border rounded-lg p-2 text-black"
+            className="mt-1 w-full border rounded-xl p-3 outline-none min-h-[110px]"
             value={imagesText}
             onChange={(e) => setImagesText(e.target.value)}
-            rows={5}
-            placeholder="https://.../img1.jpg&#10;https://.../img2.jpg"
           />
-        </label>
+        </div>
 
         {type === 'roupa' && (
-          <label className="text-sm font-semibold text-[#1D5176]">
-            Tamanhos (1 por linha)
+          <div>
+            <label className="text-sm font-semibold text-[#1D5176]">Tamanhos (1 por linha)</label>
             <textarea
-              className="mt-1 w-full border rounded-lg p-2 text-black"
+              className="mt-1 w-full border rounded-xl p-3 outline-none min-h-[90px]"
               value={sizesText}
               onChange={(e) => setSizesText(e.target.value)}
-              rows={4}
-              placeholder="PP&#10;P&#10;M&#10;G&#10;GG"
             />
-          </label>
+          </div>
         )}
 
+        <label className="inline-flex items-center gap-2 text-sm text-gray-700">
+          <input
+            type="checkbox"
+            checked={active}
+            onChange={(e) => setActive(e.target.checked)}
+          />
+          Produto ativo
+        </label>
+
         <button
-          onClick={save}
-          disabled={loading}
-          className="bg-blue-600 hover:bg-blue-700 disabled:bg-blue-400 text-white px-6 py-3 rounded-xl transition"
+          onClick={submit}
+          disabled={saving}
+          className="mt-2 bg-yellow-500 hover:bg-yellow-600 text-white py-3 rounded-xl font-extrabold disabled:opacity-60"
         >
-          {loading ? 'Salvando...' : 'Salvar'}
+          {saving ? 'Salvando...' : 'Salvar'}
         </button>
       </div>
     </div>

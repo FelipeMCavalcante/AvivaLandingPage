@@ -2,14 +2,39 @@
 
 import { useEffect, useState } from 'react';
 import { supabase } from '@/lib/supabaseClient';
+import type { Order, OrderItem } from '@/app/_types/shop';
 
-type Order = {
-  id: string;
-  created_at: string;
-  total: number;
-  status: string;
-  items: any[];
-};
+type Row = Record<string, unknown>;
+
+function asString(v: unknown, fallback = ''): string {
+  return typeof v === 'string' ? v : fallback;
+}
+function asNumber(v: unknown, fallback = 0): number {
+  return typeof v === 'number' ? v : Number(v ?? fallback) || fallback;
+}
+function asItems(v: unknown): OrderItem[] {
+  if (!Array.isArray(v)) return [];
+  return v.map((it) => {
+    const r = (it ?? {}) as Row;
+    return {
+      id: asString(r.id),
+      name: asString(r.name),
+      price: asNumber(r.price),
+      size: typeof r.size === 'string' ? r.size : null,
+    };
+  });
+}
+function normalizeOrder(row: Row): Order {
+  return {
+    id: asString(row.id),
+    created_at: asString(row.created_at),
+    total: asNumber(row.total),
+    status: asString(row.status, 'aguardando comprovante'),
+    customer_name: asString(row.customer_name, 'Cliente'),
+    customer_phone: row.customer_phone === null || typeof row.customer_phone === 'string' ? row.customer_phone : null,
+    items: asItems(row.items),
+  };
+}
 
 export default function OrdersModal({ onClose }: { onClose: () => void }) {
   const [loading, setLoading] = useState(true);
@@ -19,8 +44,9 @@ export default function OrdersModal({ onClose }: { onClose: () => void }) {
     (async () => {
       setLoading(true);
       const { data: userData } = await supabase.auth.getUser();
+      const user = userData.user;
 
-      if (!userData.user) {
+      if (!user) {
         setOrders([]);
         setLoading(false);
         return;
@@ -28,11 +54,18 @@ export default function OrdersModal({ onClose }: { onClose: () => void }) {
 
       const { data, error } = await supabase
         .from('orders')
-        .select('id,created_at,total,status,items')
-        .eq('user_id', userData.user.id)
+        .select('id,created_at,total,status,customer_name,customer_phone,items')
+        .eq('user_id', user.id)
         .order('created_at', { ascending: false });
 
-      if (!error) setOrders((data as Order[]) ?? []);
+      if (error) {
+        setOrders([]);
+        setLoading(false);
+        return;
+      }
+
+      const rows = ((data ?? []) as Row[]).map(normalizeOrder);
+      setOrders(rows);
       setLoading(false);
     })();
   }, []);
@@ -40,23 +73,16 @@ export default function OrdersModal({ onClose }: { onClose: () => void }) {
   return (
     <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center px-4">
       <div className="bg-white rounded-2xl p-6 max-w-lg w-full shadow-2xl relative">
-        <button
-          onClick={onClose}
-          className="absolute top-3 right-4 text-gray-400 hover:text-gray-600"
-        >
+        <button onClick={onClose} className="absolute top-3 right-4 text-gray-400 hover:text-gray-600">
           ✕
         </button>
 
-        <h2 className="text-2xl font-extrabold text-[#1D5176] mb-4">
-          Histórico de pedidos
-        </h2>
+        <h2 className="text-2xl font-extrabold text-[#1D5176] mb-4">Histórico de pedidos</h2>
 
         {loading ? (
           <p className="text-gray-600 text-center">Carregando pedidos...</p>
         ) : orders.length === 0 ? (
-          <p className="text-gray-600 text-center">
-            Você ainda não possui pedidos.
-          </p>
+          <p className="text-gray-600 text-center">Você ainda não possui pedidos.</p>
         ) : (
           <div className="space-y-3 max-h-96 overflow-y-auto">
             {orders.map((o) => (
@@ -65,7 +91,7 @@ export default function OrdersModal({ onClose }: { onClose: () => void }) {
                   <span className="text-sm font-bold text-[#1D5176]">
                     {new Date(o.created_at).toLocaleString('pt-BR')}
                   </span>
-                  <span className="text-yellow-600 font-extrabold">
+                  <span className="text-yellow-600 font-extrabold text-sm">
                     R$ {Number(o.total).toFixed(2)}
                   </span>
                 </div>
@@ -77,10 +103,7 @@ export default function OrdersModal({ onClose }: { onClose: () => void }) {
                 <p className="text-xs text-gray-600 mt-2">
                   Itens:{' '}
                   <span className="font-medium">
-                    {(o.items ?? [])
-                      .map((i: any) => i?.name)
-                      .filter(Boolean)
-                      .join(', ') || '—'}
+                    {(o.items ?? []).map((i) => i.name).filter(Boolean).join(', ') || '—'}
                   </span>
                 </p>
               </div>

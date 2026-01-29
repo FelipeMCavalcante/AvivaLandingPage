@@ -1,121 +1,132 @@
 'use client';
 
-import { useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
+import Link from 'next/link';
 import { supabase } from '@/lib/supabaseClient';
+import type { Product } from '@/app/_types/shop';
 
-type ProductType = 'roupa' | 'acessorio' | 'outro';
+type Row = Record<string, unknown>;
 
-type ProductRow = {
-  id: string;
-  name: string;
-  description: string;
-  price: number;
-  type: ProductType;
-  images: string[];
-  sizes: string[] | null;
-  active: boolean;
-  created_at: string;
-};
+function asString(v: unknown, fallback = ''): string {
+  return typeof v === 'string' ? v : fallback;
+}
+function asNumber(v: unknown, fallback = 0): number {
+  return typeof v === 'number' ? v : Number(v ?? fallback) || fallback;
+}
+function asBool(v: unknown, fallback = false): boolean {
+  return typeof v === 'boolean' ? v : fallback;
+}
+function asStringArray(v: unknown): string[] {
+  return Array.isArray(v) ? v.filter((x): x is string => typeof x === 'string') : [];
+}
+
+function normalizeProduct(row: Row): Product {
+  return {
+    id: asString(row.id),
+    name: asString(row.name),
+    description: asString(row.description),
+    price: asNumber(row.price),
+    type: (asString(row.type) as Product['type']) || 'outro',
+    images: asStringArray(row.images),
+    sizes: Array.isArray(row.sizes) ? asStringArray(row.sizes) : null,
+    active: asBool(row.active, true),
+    created_at: asString(row.created_at),
+  };
+}
 
 export default function AdminProductsPage() {
-  const [rows, setRows] = useState<ProductRow[]>([]);
   const [loading, setLoading] = useState(true);
-  const [q, setQ] = useState('');
+  const [products, setProducts] = useState<Product[]>([]);
+  const [err, setErr] = useState<string | null>(null);
 
-  const filtered = useMemo(() => {
-    const s = q.trim().toLowerCase();
-    if (!s) return rows;
-    return rows.filter((p) => p.name.toLowerCase().includes(s));
-  }, [rows, q]);
-
-  const load = async () => {
+  const load = useCallback(async () => {
     setLoading(true);
-    const { data, error } = await supabase
+    setErr(null);
+
+    const res = await supabase
       .from('products')
-      .select('id, name, description, price, type, images, sizes, active, created_at')
+      .select('id,name,description,price,type,images,sizes,active,created_at')
       .order('created_at', { ascending: false });
 
-    if (!error) setRows((data as ProductRow[]) ?? []);
-    setLoading(false);
-  };
+    if (res.error) {
+      setErr(res.error.message);
+      setProducts([]);
+      setLoading(false);
+      return;
+    }
 
-  useEffect(() => {
-    load();
+    setProducts(((res.data ?? []) as Row[]).map(normalizeProduct));
+    setLoading(false);
   }, []);
 
-  const toggleActive = async (id: string, current: boolean) => {
-    await supabase.from('products').update({ active: !current }).eq('id', id);
+  useEffect(() => {
+    void load();
+  }, [load]);
+
+  const toggleActive = async (id: string, active: boolean) => {
+    const { error } = await supabase.from('products').update({ active }).eq('id', id);
+    if (error) alert(error.message);
     await load();
   };
 
   return (
-    <div className="bg-white rounded-2xl shadow p-6">
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-3 mb-6">
-        <h2 className="text-xl font-extrabold text-[#1D5176]">Produtos</h2>
-
-        <div className="flex gap-3">
-          <input
-            value={q}
-            onChange={(e) => setQ(e.target.value)}
-            placeholder="Buscar produto..."
-            className="border rounded-lg px-3 py-2 text-black w-full md:w-64"
-          />
-          <a
-            href="/admin/products/new"
-            className="bg-yellow-500 hover:bg-yellow-600 text-white px-4 py-2 rounded-lg transition whitespace-nowrap"
-          >
-            + Novo Produto
-          </a>
+    <section className="min-h-screen bg-[#F8F8F8]">
+      <header className="bg-white shadow-sm px-6 py-4 flex items-center justify-between">
+        <div>
+          <h1 className="text-2xl font-extrabold text-[#1D5176]">Produtos (Admin)</h1>
+          <p className="text-sm text-gray-600">Criar e gerenciar produtos.</p>
         </div>
-      </div>
 
-      {loading ? (
-        <p className="text-gray-600">Carregando...</p>
-      ) : filtered.length === 0 ? (
-        <p className="text-gray-600">Nenhum produto encontrado.</p>
-      ) : (
-        <div className="overflow-x-auto">
-          <table className="w-full text-sm">
-            <thead>
-              <tr className="text-left text-[#1D5176]">
-                <th className="py-2">Nome</th>
-                <th className="py-2">Tipo</th>
-                <th className="py-2">Preço</th>
-                <th className="py-2">Ativo</th>
-                <th className="py-2">Ações</th>
-              </tr>
-            </thead>
+        <div className="flex gap-2">
+          <Link href="/admin" className="px-4 py-2 rounded-xl border border-gray-200 hover:bg-gray-50 text-gray-700 font-semibold">
+            Voltar
+          </Link>
 
-            <tbody>
-              {filtered.map((p) => (
-                <tr key={p.id} className="border-t">
-                  <td className="py-3">{p.name}</td>
-                  <td className="py-3">{p.type}</td>
-                  <td className="py-3">R$ {Number(p.price).toFixed(2)}</td>
-                  <td className="py-3">
-                    <button
-                      onClick={() => toggleActive(p.id, p.active)}
-                      className={`px-3 py-1 rounded-lg text-white text-xs font-semibold ${
-                        p.active ? 'bg-green-600' : 'bg-gray-400'
-                      }`}
-                    >
-                      {p.active ? 'Ativo' : 'Inativo'}
-                    </button>
-                  </td>
-                  <td className="py-3">
-                    <a
+          <Link href="/admin/products/new" className="px-4 py-2 rounded-xl bg-yellow-500 hover:bg-yellow-600 text-white font-extrabold">
+            Novo produto
+          </Link>
+        </div>
+      </header>
+
+      <div className="px-6 py-8 md:px-16">
+        {err && <div className="bg-red-50 border border-red-200 text-red-700 rounded-2xl p-4 mb-6">{err}</div>}
+
+        <div className="bg-white rounded-2xl shadow overflow-hidden">
+          {loading ? (
+            <div className="p-6 text-gray-600">Carregando...</div>
+          ) : products.length === 0 ? (
+            <div className="p-6 text-gray-600">Nenhum produto.</div>
+          ) : (
+            <div className="divide-y">
+              {products.map((p) => (
+                <div key={p.id} className="p-4 flex flex-col md:flex-row md:items-center md:justify-between gap-3">
+                  <div>
+                    <p className="font-extrabold text-[#1D5176]">{p.name}</p>
+                    <p className="text-sm text-gray-600">{p.type} • R$ {p.price.toFixed(2)}</p>
+                    <p className="text-xs text-gray-500">{p.active ? 'ativo' : 'inativo'}</p>
+                  </div>
+
+                  <div className="flex gap-2">
+                    <Link
                       href={`/admin/products/${p.id}`}
-                      className="text-blue-600 hover:underline font-semibold"
+                      className="px-4 py-2 rounded-xl bg-[#1D5176] hover:bg-[#163e59] text-white font-extrabold"
                     >
                       Editar
-                    </a>
-                  </td>
-                </tr>
+                    </Link>
+
+                    <button
+                      onClick={() => toggleActive(p.id, !p.active)}
+                      className="px-4 py-2 rounded-xl border border-gray-200 hover:bg-gray-50 font-semibold"
+                    >
+                      {p.active ? 'Desativar' : 'Ativar'}
+                    </button>
+                  </div>
+                </div>
               ))}
-            </tbody>
-          </table>
+            </div>
+          )}
         </div>
-      )}
-    </div>
+      </div>
+    </section>
   );
 }

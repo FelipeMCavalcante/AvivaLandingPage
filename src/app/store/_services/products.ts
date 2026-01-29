@@ -1,30 +1,32 @@
 import { supabase } from '@/lib/supabaseClient';
+import type { Product, ProductType } from '@/app/_types/shop';
 
-export type ProductType = 'roupa' | 'acessorio' | 'outro';
+type Row = Record<string, unknown>;
 
-export type Product = {
-  id: string;
-  name: string;
-  description: string;
-  price: number;
-  type: ProductType;
-  images: string[];
-  sizes: string[] | null;
-  active: boolean;
-  created_at: string;
-};
+function asString(v: unknown, fallback = ''): string {
+  return typeof v === 'string' ? v : fallback;
+}
+function asNumber(v: unknown, fallback = 0): number {
+  return typeof v === 'number' ? v : Number(v ?? fallback) || fallback;
+}
+function asBool(v: unknown, fallback = false): boolean {
+  return typeof v === 'boolean' ? v : fallback;
+}
+function asStringArray(v: unknown): string[] {
+  return Array.isArray(v) ? v.filter((x): x is string => typeof x === 'string') : [];
+}
 
-function normalizeProduct(row: any): Product {
+function normalizeProduct(row: Row): Product {
   return {
-    id: row.id,
-    name: row.name ?? '',
-    description: row.description ?? '',
-    price: Number(row.price ?? 0),
-    type: row.type as ProductType,
-    images: Array.isArray(row.images) ? row.images : [],
-    sizes: Array.isArray(row.sizes) ? row.sizes : null,
-    active: Boolean(row.active),
-    created_at: row.created_at,
+    id: asString(row.id),
+    name: asString(row.name),
+    description: asString(row.description),
+    price: asNumber(row.price),
+    type: (asString(row.type) as ProductType) || 'outro',
+    images: asStringArray(row.images),
+    sizes: Array.isArray(row.sizes) ? asStringArray(row.sizes) : null,
+    active: asBool(row.active, true),
+    created_at: asString(row.created_at),
   };
 }
 
@@ -37,7 +39,8 @@ export async function listProducts(): Promise<Product[]> {
 
   if (error) throw error;
 
-  return (data ?? []).map(normalizeProduct);
+  const rows = (data ?? []) as Row[];
+  return rows.map(normalizeProduct);
 }
 
 export async function getProductById(id: string): Promise<Product | null> {
@@ -48,10 +51,14 @@ export async function getProductById(id: string): Promise<Product | null> {
     .single();
 
   if (error) {
-    // se não encontrou, retorna null
-    if ((error as any).code === 'PGRST116') return null;
+    // “no rows” no PostgREST costuma vir como PGRST116
+    const code = (error as unknown as { code?: string })?.code;
+    if (code === 'PGRST116') return null;
     throw error;
   }
 
-  return data ? normalizeProduct(data) : null;
+  if (!data) return null;
+  return normalizeProduct(data as Row);
 }
+
+export type { Product };

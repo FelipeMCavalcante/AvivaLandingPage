@@ -1,166 +1,248 @@
 'use client';
 
-import { useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
+import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { supabase } from '@/lib/supabaseClient';
+import type { Order, OrderItem } from '@/app/_types/shop';
 
-type OrderStatus =
-  | 'aguardando comprovante'
-  | 'em separação'
-  | 'pronto'
-  | 'entregue'
-  | 'cancelado';
+type Row = Record<string, unknown>;
 
-type OrderRow = {
-  id: string;
-  created_at: string;
-  total: number;
-  status: OrderStatus;
-  items: any[];
-  user_id: string;
-  customer_name: string;
-  customer_phone: string | null;
-};
+function asString(v: unknown, fallback = ''): string {
+  return typeof v === 'string' ? v : fallback;
+}
+function asNumber(v: unknown, fallback = 0): number {
+  return typeof v === 'number' ? v : Number(v ?? fallback) || fallback;
+}
+function asNullableString(v: unknown): string | null {
+  return v === null ? null : typeof v === 'string' ? v : null;
+}
+function asItems(v: unknown): OrderItem[] {
+  if (!Array.isArray(v)) return [];
+  return v.map((it) => {
+    const r = (it ?? {}) as Row;
+    return {
+      id: asString(r.id),
+      name: asString(r.name),
+      price: asNumber(r.price),
+      size: typeof r.size === 'string' ? r.size : null,
+    };
+  });
+}
 
-const STATUS: OrderStatus[] = [
+function normalizeOrder(row: Row): Order {
+  return {
+    id: asString(row.id),
+    created_at: asString(row.created_at),
+    total: asNumber(row.total),
+    status: asString(row.status, 'aguardando comprovante'),
+    customer_name: asString(row.customer_name, 'Cliente'),
+    customer_phone: asNullableString(row.customer_phone),
+    items: asItems(row.items),
+  };
+}
+
+const STATUS_OPTIONS = [
   'aguardando comprovante',
   'em separação',
-  'pronto',
+  'pronto para retirada',
   'entregue',
   'cancelado',
-];
+] as const;
 
 export default function AdminOrdersPage() {
-  const [rows, setRows] = useState<OrderRow[]>([]);
+  const router = useRouter();
+
   const [loading, setLoading] = useState(true);
-  const [statusFilter, setStatusFilter] = useState<string>('all');
-  const [q, setQ] = useState('');
+  const [orders, setOrders] = useState<Order[]>([]);
+  const [errorMsg, setErrorMsg] = useState<string | null>(null);
 
-  const load = async () => {
+  const [statusFilter, setStatusFilter] = useState<string>('todos');
+
+  const load = useCallback(async () => {
     setLoading(true);
-    const { data, error } = await supabase
-      .from('orders')
-      .select('id, created_at, total, status, items, user_id, customer_name, customer_phone')
-      .order('created_at', { ascending: false });
+    setErrorMsg(null);
 
-    if (!error) setRows((data as OrderRow[]) ?? []);
-    setLoading(false);
-  };
+    try {
+      const res = await supabase
+        .from('orders')
+        .select('id,created_at,total,status,customer_name,customer_phone,items')
+        .order('created_at', { ascending: false });
 
-  useEffect(() => {
-    load();
+      if (res.error) throw res.error;
+
+      const rows = ((res.data ?? []) as Row[]).map(normalizeOrder);
+      setOrders(rows);
+    } catch (e: unknown) {
+      const msg =
+        (e as { message?: string })?.message ?? 'Erro ao carregar pedidos.';
+      setErrorMsg(msg);
+      setOrders([]);
+    } finally {
+      setLoading(false);
+    }
   }, []);
 
-  const filtered = useMemo(() => {
-    const text = q.trim().toLowerCase();
-    return rows.filter((o) => {
-      const okStatus = statusFilter === 'all' ? true : o.status === statusFilter;
-      const okText = !text
-        ? true
-        : o.customer_name.toLowerCase().includes(text) || o.id.toLowerCase().includes(text);
-      return okStatus && okText;
-    });
-  }, [rows, statusFilter, q]);
+  useEffect(() => {
+    void load();
+  }, [load]);
 
-  const updateStatus = async (id: string, status: OrderStatus) => {
-    await supabase.from('orders').update({ status }).eq('id', id);
-    await load();
+  const filtered = useMemo(() => {
+    if (statusFilter === 'todos') return orders;
+    return orders.filter((o) => o.status === statusFilter);
+  }, [orders, statusFilter]);
+
+  const updateStatus = async (orderId: string, status: string) => {
+    const prev = orders;
+
+    // otimista
+    setOrders((curr) =>
+      curr.map((o) => (o.id === orderId ? { ...o, status } : o))
+    );
+
+    const { error } = await supabase
+      .from('orders')
+      .update({ status })
+      .eq('id', orderId);
+
+    if (error) {
+      setOrders(prev);
+      alert('Erro ao atualizar status: ' + error.message);
+    }
   };
 
   return (
-    <div className="bg-white rounded-2xl shadow p-6">
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-3 mb-6">
-        <h2 className="text-xl font-extrabold text-[#1D5176]">Pedidos</h2>
+    <section className="min-h-screen bg-[#F8F8F8]">
+      <header className="bg-white shadow-sm px-6 py-4 flex items-center justify-between">
+        <div>
+          <h1 className="text-2xl font-extrabold text-[#1D5176]">
+            Pedidos (Admin)
+          </h1>
+          <p className="text-sm text-gray-600">
+            Acompanhe e atualize o status dos pedidos.
+          </p>
+        </div>
 
-        <div className="flex gap-3 flex-col md:flex-row md:items-center">
-          <input
-            value={q}
-            onChange={(e) => setQ(e.target.value)}
-            placeholder="Buscar por nome ou ID..."
-            className="border rounded-lg px-3 py-2 text-black w-full md:w-64"
-          />
-
-          <select
-            value={statusFilter}
-            onChange={(e) => setStatusFilter(e.target.value)}
-            className="border rounded-lg px-3 py-2 text-black"
+        <div className="flex gap-2">
+          <Link
+            href="/admin"
+            className="px-4 py-2 rounded-xl border border-gray-200 hover:bg-gray-50 text-gray-700 font-semibold"
           >
-            <option value="all">Todos</option>
-            {STATUS.map((s) => (
-              <option key={s} value={s}>
-                {s}
-              </option>
-            ))}
-          </select>
-
+            Voltar
+          </Link>
+          <button
+            onClick={() => router.push('/store')}
+            className="px-4 py-2 rounded-xl border border-gray-200 hover:bg-gray-50 text-gray-700 font-semibold"
+          >
+            Ir para Store
+          </button>
           <button
             onClick={load}
-            className="bg-[#1D5176] hover:bg-[#163e5a] text-white px-4 py-2 rounded-lg transition"
+            className="px-4 py-2 rounded-xl bg-yellow-500 hover:bg-yellow-600 text-white font-extrabold"
           >
-            Atualizar
+            Recarregar
           </button>
         </div>
-      </div>
+      </header>
 
-      {loading ? (
-        <p className="text-gray-600">Carregando...</p>
-      ) : filtered.length === 0 ? (
-        <p className="text-gray-600">Nenhum pedido encontrado.</p>
-      ) : (
-        <div className="space-y-3">
-          {filtered.map((o) => (
-            <div key={o.id} className="border rounded-xl p-4">
-              <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-3">
-                <div>
-                  <p className="text-sm text-gray-500">
-                    {new Date(o.created_at).toLocaleString('pt-BR')}
-                  </p>
-                  <p className="text-[#1D5176] font-bold">
-                    {o.customer_name}{' '}
-                    {o.customer_phone ? (
-                      <span className="text-gray-500 font-normal">
-                        • {o.customer_phone}
-                      </span>
-                    ) : null}
-                  </p>
-                  <p className="text-xs text-gray-500">ID: {o.id}</p>
-                </div>
+      <div className="px-6 py-8 md:px-16 space-y-6">
+        {errorMsg && (
+          <div className="bg-red-50 border border-red-200 text-red-700 rounded-2xl p-4">
+            {errorMsg}
+          </div>
+        )}
 
-                <div className="flex items-center gap-3">
-                  <p className="text-yellow-700 font-extrabold">
-                    R$ {Number(o.total).toFixed(2)}
-                  </p>
+        <div className="bg-white rounded-2xl shadow p-4 flex flex-col sm:flex-row gap-3 sm:items-center sm:justify-between">
+          <div>
+            <p className="text-sm text-gray-600">
+              Total: <b>{orders.length}</b>
+            </p>
+          </div>
 
-                  <select
-                    value={o.status}
-                    onChange={(e) => updateStatus(o.id, e.target.value as OrderStatus)}
-                    className="border rounded-lg px-3 py-2 text-black"
-                  >
-                    {STATUS.map((s) => (
-                      <option key={s} value={s}>
-                        {s}
-                      </option>
-                    ))}
-                  </select>
-
-                  <a
-                    href={`/admin/orders/${o.id}`}
-                    className="text-blue-600 hover:underline font-semibold"
-                  >
-                    Ver
-                  </a>
-                </div>
-              </div>
-
-              <div className="mt-3 text-sm text-gray-600">
-                Itens:{' '}
-                {o.items?.length
-                  ? o.items.map((i: any) => `${i.name}${i.size ? ` (${i.size})` : ''}`).join(', ')
-                  : '—'}
-              </div>
-            </div>
-          ))}
+          <div className="flex items-center gap-2">
+            <label className="text-sm font-semibold text-[#1D5176]">
+              Filtrar:
+            </label>
+            <select
+              value={statusFilter}
+              onChange={(e) => setStatusFilter(e.target.value)}
+              className="border rounded-xl p-2 text-sm"
+            >
+              <option value="todos">Todos</option>
+              {STATUS_OPTIONS.map((s) => (
+                <option key={s} value={s}>
+                  {s}
+                </option>
+              ))}
+            </select>
+          </div>
         </div>
-      )}
-    </div>
+
+        <div className="bg-white rounded-2xl shadow overflow-hidden">
+          {loading ? (
+            <div className="p-6 text-gray-600">Carregando...</div>
+          ) : filtered.length === 0 ? (
+            <div className="p-6 text-gray-600">Nenhum pedido encontrado.</div>
+          ) : (
+            <div className="divide-y">
+              {filtered.map((o) => (
+                <div
+                  key={o.id}
+                  className="p-4 flex flex-col md:flex-row md:items-center md:justify-between gap-3"
+                >
+                  <div className="min-w-0">
+                    <p className="font-extrabold text-[#1D5176]">
+                      {o.customer_name}{' '}
+                      <span className="text-xs text-gray-500 font-medium">
+                        • {new Date(o.created_at).toLocaleString('pt-BR')}
+                      </span>
+                    </p>
+
+                    <p className="text-sm text-gray-600 mt-1">
+                      Total: <b className="text-yellow-600">R$ {o.total.toFixed(2)}</b>
+                    </p>
+
+                    <p className="text-xs text-gray-600 mt-1 truncate">
+                      Itens:{' '}
+                      {(o.items ?? [])
+                        .map((i) => i.name)
+                        .filter(Boolean)
+                        .join(', ') || '—'}
+                    </p>
+
+                    {o.customer_phone && (
+                      <p className="text-xs text-gray-600 mt-1">
+                        WhatsApp: <b>{o.customer_phone}</b>
+                      </p>
+                    )}
+                  </div>
+
+                  <div className="flex flex-col sm:flex-row gap-2 sm:items-center">
+                    <select
+                      value={o.status}
+                      onChange={(e) => updateStatus(o.id, e.target.value)}
+                      className="border rounded-xl p-2 text-sm"
+                    >
+                      {STATUS_OPTIONS.map((s) => (
+                        <option key={s} value={s}>
+                          {s}
+                        </option>
+                      ))}
+                    </select>
+
+                    <Link
+                      href={`/admin/orders/${o.id}`}
+                      className="px-4 py-2 rounded-xl bg-[#1D5176] hover:bg-[#163e59] text-white font-extrabold text-center"
+                    >
+                      Detalhes
+                    </Link>
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+      </div>
+    </section>
   );
 }
