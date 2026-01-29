@@ -1,86 +1,137 @@
 'use client';
+
 import { supabase } from '@/lib/supabaseClient';
-import { useRouter } from 'next/navigation';
-import { useState } from 'react';
+import { useRouter, useSearchParams } from 'next/navigation';
+import { useEffect, useMemo, useState } from 'react';
 
 export default function LoginPage() {
   const router = useRouter();
+  const searchParams = useSearchParams();
+
+  const from = useMemo(() => searchParams.get('from') ?? 'store', [searchParams]);
+  const redirectTo = useMemo(() => {
+    if (from === 'admin') return '/admin';
+    return '/store';
+  }, [from]);
+
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+
   const [loading, setLoading] = useState(false);
+  const [checking, setChecking] = useState(true);
+  const [errorMsg, setErrorMsg] = useState<string | null>(null);
 
-  async function syncCart(userId: string) {
-    const localCart = localStorage.getItem('cart');
-    if (!localCart) return;
+  // se já estiver logado, redireciona
+  useEffect(() => {
+    (async () => {
+      const { data } = await supabase.auth.getUser();
+      if (data.user) {
+        router.replace(redirectTo);
+        return;
+      }
+      setChecking(false);
+    })();
+  }, [router, redirectTo]);
 
-    const { data: existing } = await supabase
-      .from('carts')
-      .select('items')
-      .eq('user_id', userId)
-      .single();
-    const merged = existing?.items
-      ? [...existing.items, ...JSON.parse(localCart)]
-      : JSON.parse(localCart);
-
-    await supabase
-      .from('carts')
-      .upsert({ user_id: userId, items: merged }, { onConflict: 'user_id' });
-  }
-
-  const handleLogin = async () => {
+  const handleLogin = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setErrorMsg(null);
     setLoading(true);
-    const { data, error } = await supabase.auth.signInWithPassword({
-      email,
-      password,
-    });
 
-    if (error) {
-      alert(error.message);
-    } else if (data.user) {
-      await syncCart(data.user.id);
-      router.push('/store');
+    try {
+      const { error } = await supabase.auth.signInWithPassword({
+        email: email.trim(),
+        password,
+      });
+
+      if (error) throw error;
+
+      router.replace(redirectTo);
+    } catch (err: any) {
+      setErrorMsg(err?.message ?? 'Erro ao entrar. Verifique e tente novamente.');
+    } finally {
+      setLoading(false);
     }
-
-    setLoading(false);
   };
 
+  if (checking) {
+    return (
+      <section className="min-h-screen bg-[#F8F8F8] flex items-center justify-center">
+        <p className="text-[#1D5176] font-semibold">Carregando...</p>
+      </section>
+    );
+  }
+
   return (
-    <div className='flex flex-col items-center justify-center min-h-screen bg-gray-50 p-4'>
-      <div className='bg-white rounded-2xl shadow-lg p-8 w-full max-w-sm'>
-        <h1 className='text-2xl font-bold text-[#1D5176] text-center mb-6'>
-          Entrar
-        </h1>
-        <input
-          type='email'
-          placeholder='E-mail'
-          className='border border-gray-300 rounded-lg p-3 w-full mb-3 text-black'
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
-        <input
-          type='password'
-          placeholder='Senha'
-          className='border border-gray-300 rounded-lg p-3 w-full mb-4 text-black'
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-        <button
-          onClick={handleLogin}
-          disabled={loading}
-          className='bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 w-full rounded-lg transition'
-        >
-          {loading ? 'Entrando...' : 'Entrar'}
-        </button>
-        <p className='text-center text-sm text-gray-600 mt-4'>
-          Não tem conta?{' '}
-          <span
-            onClick={() => router.push('/register')}
-            className='text-blue-600 font-semibold cursor-pointer hover:underline'
+    <section className="min-h-screen bg-[#F8F8F8] flex items-center justify-center px-4">
+      <div className="bg-white w-full max-w-md rounded-2xl shadow p-6">
+        <div className="flex flex-col items-center mb-6">
+          <img src="/avivablue.png" alt="Aviva" className="h-14 w-auto mb-3" />
+          <h1 className="text-2xl font-extrabold text-[#1D5176]">Entrar</h1>
+          <p className="text-gray-600 text-sm mt-1">
+            Acesse sua conta para continuar.
+          </p>
+        </div>
+
+        {errorMsg && (
+          <div className="mb-4 bg-red-50 border border-red-200 text-red-700 rounded-lg p-3 text-sm">
+            {errorMsg}
+          </div>
+        )}
+
+        <form onSubmit={handleLogin} className="grid gap-4">
+          <label className="text-sm font-semibold text-[#1D5176]">
+            E-mail
+            <input
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              className="mt-1 w-full border rounded-lg p-2 text-black"
+              placeholder="seuemail@dominio.com"
+              required
+            />
+          </label>
+
+          <label className="text-sm font-semibold text-[#1D5176]">
+            Senha
+            <input
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              className="mt-1 w-full border rounded-lg p-2 text-black"
+              placeholder="••••••••"
+              required
+            />
+          </label>
+
+          <button
+            type="submit"
+            disabled={loading}
+            className="bg-blue-600 hover:bg-blue-700 disabled:bg-blue-400 text-white px-6 py-3 rounded-xl transition font-semibold"
           >
-            Cadastrar
-          </span>
-        </p>
+            {loading ? 'Entrando...' : 'Entrar'}
+          </button>
+        </form>
+
+        <div className="mt-6 text-center text-sm text-gray-600">
+          Ainda não tem conta?{' '}
+          <a
+            href={`/register?from=${from}`}
+            className="text-[#1D5176] font-semibold hover:underline"
+          >
+            Criar conta
+          </a>
+        </div>
+
+        <div className="mt-4 text-center">
+          <a
+            href={redirectTo}
+            className="text-sm text-gray-500 hover:underline"
+          >
+            Voltar
+          </a>
+        </div>
       </div>
-    </div>
+    </section>
   );
 }
