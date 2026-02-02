@@ -3,8 +3,14 @@
 import { useRouter } from 'next/navigation';
 import { supabase } from '@/lib/supabaseClient';
 import { useCart } from '../_context/CartContext';
+import { OrderItem } from '@/app/_types/shop';
 
-export default function CartDrawer({ onClose }: { onClose: () => void }) {
+interface CartDrawerProps {
+  onClose: () => void;
+  onFinish?: (items: OrderItem[], total: number) => void;
+}
+
+export default function CartDrawer({ onClose, onFinish }: CartDrawerProps) {
   const router = useRouter();
   const { cart, total, removeItem, clearCart } = useCart();
 
@@ -24,18 +30,26 @@ export default function CartDrawer({ onClose }: { onClose: () => void }) {
     const rawPhone = typeof meta.phone === 'string' ? meta.phone : '';
     const customer_phone = rawPhone.trim() ? rawPhone : null;
 
+    const itemsCopy = [...cart] as OrderItem[];
+    const totalCopy = total;
+
     await supabase.from('orders').insert({
       user_id: data.user.id,
       customer_name,
       customer_phone,
-      items: cart,
-      total,
+      items: itemsCopy,
+      total: totalCopy,
       status: 'aguardando comprovante',
     });
 
     onClose();
     clearCart();
-    router.push('/store?paid=1');
+
+    if (onFinish) {
+      onFinish(itemsCopy, totalCopy);
+    } else {
+      router.push('/store?paid=1');
+    }
   };
 
   return (
