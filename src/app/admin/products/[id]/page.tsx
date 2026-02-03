@@ -115,20 +115,20 @@ export default function AdminEditProductPage() {
     <section className="min-h-screen bg-[#F8F8F8]">
       <header className="bg-white shadow-sm px-6 py-4 flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-extrabold text-[#1D5176]">Editar produto</h1>
-          <p className="text-sm text-gray-600">Atualize os dados do produto.</p>
+          <h1 className="text-2xl font-extrabold text-aviva-blue">Editar produto</h1>
+          <p className="text-sm text-gray-800">Atualize os dados do produto.</p>
         </div>
 
         <div className="flex gap-2">
           <Link
             href="/admin/products"
-            className="px-4 py-2 rounded-xl border border-gray-200 hover:bg-gray-50 text-gray-700 font-semibold"
+            className="px-4 py-2 rounded-xl border border-gray-200 hover:bg-gray-50 text-gray-900 font-semibold"
           >
             Voltar
           </Link>
           <button
             onClick={load}
-            className="px-4 py-2 rounded-xl bg-yellow-500 hover:bg-yellow-600 text-white font-extrabold"
+            className="px-4 py-2 rounded-xl bg-aviva-blue hover:bg-blue-600 text-white font-extrabold"
           >
             Recarregar
           </button>
@@ -143,9 +143,9 @@ export default function AdminEditProductPage() {
         )}
 
         {loading ? (
-          <div className="bg-white rounded-2xl shadow p-6 text-gray-600">Carregando...</div>
+          <div className="bg-white rounded-2xl shadow p-6 text-gray-800">Carregando...</div>
         ) : !product ? (
-          <div className="bg-white rounded-2xl shadow p-6 text-gray-600">
+          <div className="bg-white rounded-2xl shadow p-6 text-gray-800">
             Produto não encontrado.
           </div>
         ) : (

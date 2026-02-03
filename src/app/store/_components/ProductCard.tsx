@@ -21,14 +21,14 @@ export default function ProductCard({ product }: { product: Product }) {
         className="rounded-xl w-full h-56 object-cover"
       />
 
-      <h3 className="mt-3 font-bold text-[#1D5176]">{product.name}</h3>
-      <p className="text-gray-600 text-sm line-clamp-2">{product.description}</p>
+      <h3 className="mt-3 font-bold text-aviva-blue">{product.name}</h3>
+      <p className="text-gray-800 text-sm line-clamp-2">{product.description}</p>
 
-      <p className="mt-2 text-yellow-600 font-semibold">
+      <p className="mt-2 text-aviva-blue font-semibold">
         R$ {Number(product.price).toFixed(2)}
       </p>
 
-      <span className="mt-3 inline-flex justify-center bg-yellow-500 hover:bg-yellow-600 text-white px-4 py-2 rounded-lg">
+      <span className="mt-3 inline-flex justify-center bg-aviva-blue hover:bg-blue-600 text-white px-4 py-2 rounded-lg">
         Ver detalhes
       </span>
     </Link>

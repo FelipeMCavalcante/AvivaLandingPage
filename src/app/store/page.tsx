@@ -97,7 +97,7 @@ export default function StorePage() {
       <StoreHeader onOpenAccount={openAccount} />
 
       <div className="px-6 py-10 md:px-24">
-        <h1 className="text-3xl font-extrabold text-[#1D5176] mb-8 text-center">
+        <h1 className="text-3xl font-extrabold text-aviva-blue mb-8 text-center">
           Loja Aviva
         </h1>
 

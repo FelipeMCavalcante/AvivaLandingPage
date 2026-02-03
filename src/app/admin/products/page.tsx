@@ -73,16 +73,16 @@ export default function AdminProductsPage() {
     <section className="min-h-screen bg-[#F8F8F8]">
       <header className="bg-white shadow-sm px-6 py-4 flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-extrabold text-[#1D5176]">Produtos (Admin)</h1>
-          <p className="text-sm text-gray-600">Criar e gerenciar produtos.</p>
+          <h1 className="text-2xl font-extrabold text-aviva-blue">Produtos (Admin)</h1>
+          <p className="text-sm text-gray-800">Criar e gerenciar produtos.</p>
         </div>
 
         <div className="flex gap-2">
-          <Link href="/admin" className="px-4 py-2 rounded-xl border border-gray-200 hover:bg-gray-50 text-gray-700 font-semibold">
+          <Link href="/admin" className="px-4 py-2 rounded-xl border border-gray-200 hover:bg-gray-50 text-gray-900 font-semibold">
             Voltar
           </Link>
 
-          <Link href="/admin/products/new" className="px-4 py-2 rounded-xl bg-yellow-500 hover:bg-yellow-600 text-white font-extrabold">
+          <Link href="/admin/products/new" className="px-4 py-2 rounded-xl bg-aviva-blue hover:bg-blue-600 text-white font-extrabold">
             Novo produto
           </Link>
         </div>
@@ -93,23 +93,23 @@ export default function AdminProductsPage() {
 
         <div className="bg-white rounded-2xl shadow overflow-hidden">
           {loading ? (
-            <div className="p-6 text-gray-600">Carregando...</div>
+            <div className="p-6 text-gray-800">Carregando...</div>
           ) : products.length === 0 ? (
-            <div className="p-6 text-gray-600">Nenhum produto.</div>
+            <div className="p-6 text-gray-800">Nenhum produto.</div>
           ) : (
             <div className="divide-y">
               {products.map((p) => (
                 <div key={p.id} className="p-4 flex flex-col md:flex-row md:items-center md:justify-between gap-3">
                   <div>
-                    <p className="font-extrabold text-[#1D5176]">{p.name}</p>
-                    <p className="text-sm text-gray-600">{p.type} • R$ {p.price.toFixed(2)}</p>
-                    <p className="text-xs text-gray-500">{p.active ? 'ativo' : 'inativo'}</p>
+                    <p className="font-extrabold text-aviva-blue">{p.name}</p>
+                    <p className="text-sm text-gray-800">{p.type} • R$ {p.price.toFixed(2)}</p>
+                    <p className="text-xs text-gray-700">{p.active ? 'ativo' : 'inativo'}</p>
                   </div>
 
                   <div className="flex gap-2">
                     <Link
                       href={`/admin/products/${p.id}`}
-                      className="px-4 py-2 rounded-xl bg-[#1D5176] hover:bg-[#163e59] text-white font-extrabold"
+                      className="px-4 py-2 rounded-xl bg-aviva-blue hover:bg-blue-600 text-white font-extrabold"
                     >
                       Editar
                     </Link>

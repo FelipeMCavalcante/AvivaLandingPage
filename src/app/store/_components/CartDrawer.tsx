@@ -54,15 +54,15 @@ export default function CartDrawer({ onClose, onFinish }: CartDrawerProps) {
 
   return (
     <div className="fixed top-0 right-0 w-80 h-full bg-white shadow-2xl p-6 z-40 overflow-y-auto">
-      <h3 className="text-xl font-bold mb-4 text-[#1D5176] flex justify-between">
+      <h3 className="text-xl font-bold mb-4 text-aviva-blue flex justify-between">
         Seu Carrinho
-        <button onClick={onClose} className="text-gray-500 hover:text-gray-700">
+        <button onClick={onClose} className="text-gray-700 hover:text-gray-900">
           ✕
         </button>
       </h3>
 
       {cart.length === 0 ? (
-        <p className="text-gray-500 text-sm text-center mt-12">
+        <p className="text-gray-700 text-sm text-center mt-12">
           Seu carrinho está vazio.
         </p>
       ) : (
@@ -70,12 +70,12 @@ export default function CartDrawer({ onClose, onFinish }: CartDrawerProps) {
           {cart.map((item, i) => (
             <div
               key={`${item.id}-${i}`}
-              className="flex justify-between items-center border-b py-2 text-[#1D5176]"
+              className="flex justify-between items-center border-b py-2 text-aviva-blue"
             >
               <p className="pr-3">
                 {item.name}{' '}
                 {item.size && (
-                  <span className="text-gray-500 text-xs ml-1">
+                  <span className="text-gray-700 text-xs ml-1">
                     ({item.size})
                   </span>
                 )}
@@ -91,16 +91,16 @@ export default function CartDrawer({ onClose, onFinish }: CartDrawerProps) {
           ))}
 
           <div className="text-right mt-4">
-            <p className="text-lg font-semibold text-blue-600">
+            <p className="text-lg font-semibold text-aviva-blue">
               Total:{' '}
-              <span className="text-yellow-600">R$ {total.toFixed(2)}</span>
+              <span className="text-aviva-blue">R$ {total.toFixed(2)}</span>
             </p>
           </div>
 
           <div className="mt-6 grid gap-3">
             <button
               onClick={finish}
-              className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-xl transition font-semibold"
+              className="bg-aviva-blue hover:bg-blue-600 text-white px-6 py-3 rounded-xl transition font-semibold"
             >
               Finalizar compra
             </button>

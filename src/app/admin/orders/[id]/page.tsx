@@ -124,23 +124,23 @@ export default function AdminOrderDetailsPage() {
     <section className="min-h-screen bg-[#F8F8F8]">
       <header className="bg-white shadow-sm px-6 py-4 flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-extrabold text-[#1D5176]">
+          <h1 className="text-2xl font-extrabold text-aviva-blue">
             Pedido (Admin)
           </h1>
-          <p className="text-sm text-gray-600">Detalhes do pedido.</p>
+          <p className="text-sm text-gray-800">Detalhes do pedido.</p>
         </div>
 
         <div className="flex gap-2">
           <Link
             href="/admin/orders"
-            className="px-4 py-2 rounded-xl border border-gray-200 hover:bg-gray-50 text-gray-700 font-semibold"
+            className="px-4 py-2 rounded-xl border border-gray-200 hover:bg-gray-50 text-gray-900 font-semibold"
           >
             Voltar
           </Link>
 
           <button
             onClick={() => router.push('/admin')}
-            className="px-4 py-2 rounded-xl border border-gray-200 hover:bg-gray-50 text-gray-700 font-semibold"
+            className="px-4 py-2 rounded-xl border border-gray-200 hover:bg-gray-50 text-gray-900 font-semibold"
           >
             Admin Home
           </button>
@@ -155,11 +155,11 @@ export default function AdminOrderDetailsPage() {
         )}
 
         {loading ? (
-          <div className="bg-white rounded-2xl shadow p-6 text-gray-600">
+          <div className="bg-white rounded-2xl shadow p-6 text-gray-800">
             Carregando...
           </div>
         ) : !order ? (
-          <div className="bg-white rounded-2xl shadow p-6 text-gray-600">
+          <div className="bg-white rounded-2xl shadow p-6 text-gray-800">
             Pedido não encontrado.
           </div>
         ) : (
@@ -167,21 +167,21 @@ export default function AdminOrderDetailsPage() {
             <div className="bg-white rounded-2xl shadow p-6">
               <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
                 <div>
-                  <p className="text-sm text-gray-600">Cliente</p>
-                  <p className="text-xl font-extrabold text-[#1D5176]">
+                  <p className="text-sm text-gray-800">Cliente</p>
+                  <p className="text-xl font-extrabold text-aviva-blue">
                     {order.customer_name}
                   </p>
-                  <p className="text-sm text-gray-600 mt-1">
+                  <p className="text-sm text-gray-800 mt-1">
                     {new Date(order.created_at).toLocaleString('pt-BR')}
                   </p>
                 </div>
 
                 <div className="text-right">
-                  <p className="text-sm text-gray-600">Total</p>
-                  <p className="text-2xl font-extrabold text-yellow-600">
+                  <p className="text-sm text-gray-800">Total</p>
+                  <p className="text-2xl font-extrabold text-aviva-blue">
                     R$ {order.total.toFixed(2)}
                   </p>
-                  <p className="text-xs text-gray-500">
+                  <p className="text-xs text-gray-700">
                     Soma itens: R$ {itemsTotal.toFixed(2)}
                   </p>
                 </div>
@@ -189,7 +189,7 @@ export default function AdminOrderDetailsPage() {
 
               <div className="mt-5 flex flex-col sm:flex-row gap-3 sm:items-center sm:justify-between">
                 <div className="flex items-center gap-2">
-                  <span className="text-sm font-semibold text-[#1D5176]">
+                  <span className="text-sm font-semibold text-aviva-blue">
                     Status:
                   </span>
                   <select
@@ -216,7 +216,7 @@ export default function AdminOrderDetailsPage() {
                   )}
                   <button
                     onClick={load}
-                    className="px-4 py-2 rounded-xl bg-yellow-500 hover:bg-yellow-600 text-white font-extrabold"
+                    className="px-4 py-2 rounded-xl bg-aviva-blue hover:bg-blue-600 text-white font-extrabold"
                   >
                     Recarregar
                   </button>
@@ -225,12 +225,12 @@ export default function AdminOrderDetailsPage() {
             </div>
 
             <div className="bg-white rounded-2xl shadow p-6">
-              <h2 className="text-lg font-extrabold text-[#1D5176] mb-4">
+              <h2 className="text-lg font-extrabold text-aviva-blue mb-4">
                 Itens
               </h2>
 
               {order.items.length === 0 ? (
-                <p className="text-gray-600">Sem itens.</p>
+                <p className="text-gray-800">Sem itens.</p>
               ) : (
                 <div className="space-y-3">
                   {order.items.map((it, idx) => (
@@ -239,21 +239,21 @@ export default function AdminOrderDetailsPage() {
                       className="border rounded-xl p-4 flex justify-between items-center"
                     >
                       <div>
-                        <p className="font-extrabold text-[#1D5176]">
+                        <p className="font-extrabold text-aviva-blue">
                           {it.name}
                           {it.size ? (
-                            <span className="text-xs text-gray-500 font-semibold">
+                            <span className="text-xs text-gray-700 font-semibold">
                               {' '}
                               ({it.size})
                             </span>
                           ) : null}
                         </p>
-                        <p className="text-xs text-gray-600">
+                        <p className="text-xs text-gray-800">
                           ID: {it.id || '—'}
                         </p>
                       </div>
 
-                      <div className="font-extrabold text-yellow-600">
+                      <div className="font-extrabold text-aviva-blue">
                         R$ {Number(it.price).toFixed(2)}
                       </div>
                     </div>

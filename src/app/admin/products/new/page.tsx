@@ -49,14 +49,14 @@ export default function NewProductPage() {
     <section className="min-h-screen bg-[#F8F8F8]">
       <header className="bg-white shadow-sm px-6 py-4 flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-extrabold text-[#1D5176]">Novo produto</h1>
-          <p className="text-sm text-gray-600">Cadastre um item para a Loja Aviva.</p>
+          <h1 className="text-2xl font-extrabold text-aviva-blue">Novo produto</h1>
+          <p className="text-sm text-gray-800">Cadastre um item para a Loja Aviva.</p>
         </div>
 
         <div className="flex gap-2">
           <Link
             href="/admin/products"
-            className="px-4 py-2 rounded-xl border border-gray-200 hover:bg-gray-50 text-gray-700 font-semibold"
+            className="px-4 py-2 rounded-xl border border-gray-200 hover:bg-gray-50 text-gray-900 font-semibold"
           >
             Voltar
           </Link>

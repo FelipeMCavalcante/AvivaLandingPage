@@ -114,14 +114,14 @@ export default function AdminHomePage() {
     <section className="min-h-screen bg-[#F8F8F8]">
       <header className="bg-white shadow-sm px-6 py-4 flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-extrabold text-[#1D5176]">Admin • Loja Aviva</h1>
-          <p className="text-sm text-gray-600">Gerencie produtos e acompanhe pedidos.</p>
+          <h1 className="text-2xl font-extrabold text-aviva-blue">Admin • Loja Aviva</h1>
+          <p className="text-sm text-gray-800">Gerencie produtos e acompanhe pedidos.</p>
         </div>
 
         <div className="flex gap-2">
           <button
             onClick={() => router.push('/store')}
-            className="px-4 py-2 rounded-xl border border-gray-200 hover:bg-gray-50 text-gray-700 font-semibold"
+            className="px-4 py-2 rounded-xl border border-gray-200 hover:bg-gray-50 text-gray-900 font-semibold"
           >
             Voltar para Store
           </button>
@@ -139,18 +139,18 @@ export default function AdminHomePage() {
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           <button onClick={() => router.push('/admin/products')} className="bg-white rounded-2xl shadow p-5 text-left hover:shadow-md transition">
-            <p className="text-sm text-gray-600">Gerenciar</p>
-            <p className="text-xl font-extrabold text-[#1D5176]">Produtos</p>
-            <p className="text-sm text-gray-600 mt-1">Criar, editar, ativar/desativar.</p>
+            <p className="text-sm text-gray-800">Gerenciar</p>
+            <p className="text-xl font-extrabold text-aviva-blue">Produtos</p>
+            <p className="text-sm text-gray-800 mt-1">Criar, editar, ativar/desativar.</p>
           </button>
 
           <button onClick={() => router.push('/admin/orders')} className="bg-white rounded-2xl shadow p-5 text-left hover:shadow-md transition">
-            <p className="text-sm text-gray-600">Acompanhar</p>
-            <p className="text-xl font-extrabold text-[#1D5176]">Pedidos</p>
-            <p className="text-sm text-gray-600 mt-1">Status, itens e contato do cliente.</p>
+            <p className="text-sm text-gray-800">Acompanhar</p>
+            <p className="text-xl font-extrabold text-aviva-blue">Pedidos</p>
+            <p className="text-sm text-gray-800 mt-1">Status, itens e contato do cliente.</p>
           </button>
 
-          <button onClick={() => void load()} className="bg-yellow-500 hover:bg-yellow-600 text-white rounded-2xl shadow p-5 text-left transition">
+          <button onClick={() => void load()} className="bg-aviva-blue hover:bg-blue-600 text-white rounded-2xl shadow p-5 text-left transition">
             <p className="text-sm text-white/90">Atualizar</p>
             <p className="text-xl font-extrabold">Recarregar dados</p>
             <p className="text-sm text-white/90 mt-1">Puxa pedidos e produtos.</p>
@@ -168,29 +168,29 @@ export default function AdminHomePage() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           <div className="bg-white rounded-2xl shadow p-6">
             <div className="flex items-center justify-between mb-4">
-              <h2 className="text-lg font-extrabold text-[#1D5176]">Últimos pedidos</h2>
-              <button onClick={() => router.push('/admin/orders')} className="text-sm font-semibold text-[#1D5176] hover:underline">
+              <h2 className="text-lg font-extrabold text-aviva-blue">Últimos pedidos</h2>
+              <button onClick={() => router.push('/admin/orders')} className="text-sm font-semibold text-aviva-blue hover:underline">
                 Ver todos
               </button>
             </div>
 
             {loading ? (
-              <p className="text-gray-600">Carregando...</p>
+              <p className="text-gray-800">Carregando...</p>
             ) : orders.length === 0 ? (
-              <p className="text-gray-600">Nenhum pedido ainda.</p>
+              <p className="text-gray-800">Nenhum pedido ainda.</p>
             ) : (
               <div className="space-y-3">
                 {orders.map((o) => (
                   <button key={o.id} onClick={() => router.push('/admin/orders')} className="w-full text-left border rounded-xl p-4 hover:bg-gray-50 transition">
                     <div className="flex justify-between items-center">
-                      <span className="font-extrabold text-[#1D5176] text-sm">{o.customer_name}</span>
-                      <span className="font-extrabold text-yellow-600 text-sm">R$ {Number(o.total).toFixed(2)}</span>
+                      <span className="font-extrabold text-aviva-blue text-sm">{o.customer_name}</span>
+                      <span className="font-extrabold text-aviva-blue text-sm">R$ {Number(o.total).toFixed(2)}</span>
                     </div>
                     <div className="flex justify-between items-center mt-1">
-                      <span className="text-xs text-gray-600">{new Date(o.created_at).toLocaleString('pt-BR')}</span>
-                      <span className="text-xs font-semibold text-gray-700">{o.status}</span>
+                      <span className="text-xs text-gray-800">{new Date(o.created_at).toLocaleString('pt-BR')}</span>
+                      <span className="text-xs font-semibold text-gray-800">{o.status}</span>
                     </div>
-                    <div className="text-xs text-gray-600 mt-2">
+                    <div className="text-xs text-gray-800 mt-2">
                       Itens: {(o.items ?? []).map((i) => i.name).filter(Boolean).join(', ') || '—'}
                     </div>
                   </button>
@@ -201,30 +201,30 @@ export default function AdminHomePage() {
 
           <div className="bg-white rounded-2xl shadow p-6">
             <div className="flex items-center justify-between mb-4">
-              <h2 className="text-lg font-extrabold text-[#1D5176]">Produtos recentes</h2>
-              <button onClick={() => router.push('/admin/products')} className="text-sm font-semibold text-[#1D5176] hover:underline">
+              <h2 className="text-lg font-extrabold text-aviva-blue">Produtos recentes</h2>
+              <button onClick={() => router.push('/admin/products')} className="text-sm font-semibold text-aviva-blue hover:underline">
                 Ver todos
               </button>
             </div>
 
             {loading ? (
-              <p className="text-gray-600">Carregando...</p>
+              <p className="text-gray-800">Carregando...</p>
             ) : products.length === 0 ? (
-              <p className="text-gray-600">Nenhum produto ainda.</p>
+              <p className="text-gray-800">Nenhum produto ainda.</p>
             ) : (
               <div className="space-y-3">
                 {products.map((p) => (
                   <div key={p.id} className="border rounded-xl p-4 flex items-center justify-between">
                     <div>
-                      <p className="font-extrabold text-[#1D5176] text-sm">{p.name}</p>
-                      <p className="text-xs text-gray-600 mt-1">
+                      <p className="font-extrabold text-aviva-blue text-sm">{p.name}</p>
+                      <p className="text-xs text-gray-800 mt-1">
                         {p.type} •{' '}
                         <span className={p.active ? 'text-green-700' : 'text-red-700'}>{p.active ? 'ativo' : 'inativo'}</span>
                       </p>
                     </div>
                     <div className="text-right">
-                      <p className="font-extrabold text-yellow-600 text-sm">R$ {Number(p.price).toFixed(2)}</p>
-                      <p className="text-xs text-gray-500">{new Date(p.created_at).toLocaleDateString('pt-BR')}</p>
+                      <p className="font-extrabold text-aviva-blue text-sm">R$ {Number(p.price).toFixed(2)}</p>
+                      <p className="text-xs text-gray-700">{new Date(p.created_at).toLocaleDateString('pt-BR')}</p>
                     </div>
                   </div>
                 ))}
@@ -240,8 +240,8 @@ export default function AdminHomePage() {
 function StatCard({ title, value }: { title: string; value: number }) {
   return (
     <div className="bg-white rounded-2xl shadow p-5">
-      <p className="text-xs text-gray-600">{title}</p>
-      <p className="text-2xl font-extrabold text-[#1D5176] mt-1">{value}</p>
+      <p className="text-xs text-gray-800">{title}</p>
+      <p className="text-2xl font-extrabold text-aviva-blue mt-1">{value}</p>
     </div>
   );
 }

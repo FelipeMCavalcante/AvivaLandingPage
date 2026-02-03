@@ -11,6 +11,7 @@ export default {
       colors: {
         background: 'var(--background)',
         foreground: 'var(--foreground)',
+        'aviva-blue': '#3871fe',
       },
       fontFamily: {
         neueBold: ['var(--font-neueMachinaBold)'],

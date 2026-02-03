@@ -37,7 +37,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
   if (checking) {
     return (
       <div className="min-h-screen bg-[#F8F8F8] flex items-center justify-center">
-        <div className="bg-white rounded-2xl shadow p-6 text-[#1D5176] font-semibold">
+        <div className="bg-white rounded-2xl shadow p-6 text-aviva-blue font-semibold">
           Verificando permissões...
         </div>
       </div>
