@@ -21,7 +21,7 @@ export default function ProductPage() {
     })();
   }, [params.id]);
 
-  if (loading) return <div className="p-6 text-[#1D5176] font-semibold">Carregando...</div>;
+  if (loading) return <div className="p-6 text-aviva-blue font-semibold">Carregando...</div>;
   if (!product) return <div className="p-6 text-red-600 font-semibold">Produto não encontrado.</div>;
 
   return (

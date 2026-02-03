@@ -44,7 +44,7 @@ export default function CheckoutModal({ items, total, onClose }: CheckoutModalPr
       <div className="bg-white rounded-2xl p-6 max-w-md w-full shadow-2xl relative animate-in fade-in zoom-in duration-300">
         <button
           onClick={onClose}
-          className="absolute top-3 right-4 text-gray-400 hover:text-gray-600 transition"
+          className="absolute top-3 right-4 text-gray-600 hover:text-gray-800 transition"
         >
           ✕
         </button>
@@ -55,14 +55,14 @@ export default function CheckoutModal({ items, total, onClose }: CheckoutModalPr
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M5 13l4 4L19 7" />
             </svg>
           </div>
-          <h2 className="text-2xl font-extrabold text-[#1D5176]">Pedido Recebido!</h2>
-          <p className="text-gray-600 mt-2">
+          <h2 className="text-2xl font-extrabold text-aviva-blue">Pedido Recebido!</h2>
+          <p className="text-gray-800 mt-2">
             Seu pedido foi registrado em nosso sistema.
           </p>
         </div>
 
         <div className="bg-gray-50 rounded-xl p-4 mb-6 border border-gray-100">
-          <h3 className="font-bold text-[#1D5176] mb-3 text-sm uppercase tracking-wider">Resumo do Pedido</h3>
+          <h3 className="font-bold text-aviva-blue mb-3 text-sm uppercase tracking-wider">Resumo do Pedido</h3>
           <div className="space-y-2 max-h-40 overflow-y-auto pr-2">
             {Object.values(items.reduce((acc: Record<string, OrderItem & { quantity: number }>, item) => {
               const key = `${item.name}-${item.size || ''}`;
@@ -71,16 +71,16 @@ export default function CheckoutModal({ items, total, onClose }: CheckoutModalPr
               return acc;
             }, {})).map((item, index) => (
               <div key={index} className="flex justify-between text-sm">
-                <span className="text-gray-700">
-                  {item.quantity}x {item.name} {item.size && <span className="text-gray-400 text-xs">({item.size})</span>}
+                <span className="text-gray-900">
+                  {item.quantity}x {item.name} {item.size && <span className="text-gray-600 text-xs">({item.size})</span>}
                 </span>
-                <span className="font-semibold text-[#1D5176]">R$ {(Number(item.price) * item.quantity).toFixed(2)}</span>
+                <span className="font-semibold text-aviva-blue">R$ {(Number(item.price) * item.quantity).toFixed(2)}</span>
               </div>
             ))}
           </div>
           <div className="border-t border-gray-200 mt-3 pt-3 flex justify-between items-center">
             <span className="font-bold text-gray-900">Total</span>
-            <span className="text-xl font-extrabold text-blue-600">
+            <span className="text-xl font-extrabold text-aviva-blue">
               R$ {total.toFixed(2)}
             </span>
           </div>
@@ -103,7 +103,7 @@ export default function CheckoutModal({ items, total, onClose }: CheckoutModalPr
           </button>
         </div>
 
-        <p className="text-[10px] text-gray-400 text-center mt-4">
+        <p className="text-[10px] text-gray-500 text-center mt-4">
           Ao clicar em enviar, você será redirecionado para o WhatsApp.
         </p>
       </div>

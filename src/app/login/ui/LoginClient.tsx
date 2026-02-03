@@ -37,8 +37,8 @@ export default function LoginClient() {
   return (
     <section className="min-h-screen bg-[#F8F8F8] flex items-center justify-center px-4">
       <div className="bg-white rounded-2xl shadow p-6 w-full max-w-sm">
-        <h1 className="text-2xl font-extrabold text-[#1D5176]">Login</h1>
-        <p className="text-sm text-gray-600 mt-1">Acesse sua conta.</p>
+        <h1 className="text-2xl font-extrabold text-aviva-blue">Login</h1>
+        <p className="text-sm text-gray-800 mt-1">Acesse sua conta.</p>
 
         {errorMsg && (
           <div className="mt-4 bg-red-50 border border-red-200 text-red-700 rounded-xl p-3 text-sm">
@@ -64,14 +64,14 @@ export default function LoginClient() {
           <button
             onClick={login}
             disabled={loading}
-            className="bg-yellow-500 hover:bg-yellow-600 text-white py-3 rounded-xl font-extrabold disabled:opacity-60"
+            className="bg-aviva-blue hover:bg-blue-600 text-white py-3 rounded-xl font-extrabold disabled:opacity-60"
           >
             {loading ? 'Entrando...' : 'Entrar'}
           </button>
 
           <button
             onClick={() => router.push('/register')}
-            className="border border-gray-200 hover:bg-gray-50 text-gray-700 py-3 rounded-xl font-extrabold"
+            className="border border-gray-200 hover:bg-gray-50 text-gray-900 font-extrabold py-3 rounded-xl"
           >
             Criar conta
           </button>

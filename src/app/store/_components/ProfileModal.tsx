@@ -38,18 +38,18 @@ export default function ProfileModal({
       <div className="bg-white rounded-2xl p-6 max-w-sm w-full shadow-2xl relative">
         <button
           onClick={onClose}
-          className="absolute top-3 right-4 text-gray-400 hover:text-gray-600"
+          className="absolute top-3 right-4 text-gray-600 hover:text-gray-800"
         >
           ✕
         </button>
 
-        <h2 className="text-2xl font-extrabold text-[#1D5176] mb-4">
+        <h2 className="text-2xl font-extrabold text-aviva-blue mb-4">
           Meu perfil
         </h2>
 
-        <p className="text-sm text-gray-600 mb-4">{email ?? '—'}</p>
+        <p className="text-sm text-gray-800 mb-4">{email ?? '—'}</p>
 
-        <label className="text-sm font-semibold text-[#1D5176]">Nome</label>
+        <label className="text-sm font-semibold text-aviva-blue">Nome</label>
         <input
           value={name}
           onChange={(e) => setName(e.target.value)}
@@ -57,7 +57,7 @@ export default function ProfileModal({
           placeholder="Seu nome"
         />
 
-        <label className="text-sm font-semibold text-[#1D5176] mt-4 block">
+        <label className="text-sm font-semibold text-aviva-blue mt-4 block">
           Telefone
         </label>
         <input
@@ -70,7 +70,7 @@ export default function ProfileModal({
         <button
           onClick={save}
           disabled={saving}
-          className="mt-5 w-full bg-yellow-500 hover:bg-yellow-600 text-white py-3 rounded-xl font-extrabold disabled:opacity-60"
+          className="mt-5 w-full bg-aviva-blue hover:bg-blue-600 text-white py-3 rounded-xl font-extrabold disabled:opacity-60"
         >
           {saving ? 'Salvando...' : 'Salvar'}
         </button>

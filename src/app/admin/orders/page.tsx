@@ -115,10 +115,10 @@ export default function AdminOrdersPage() {
     <section className="min-h-screen bg-[#F8F8F8]">
       <header className="bg-white shadow-sm px-6 py-4 flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-extrabold text-[#1D5176]">
+          <h1 className="text-2xl font-extrabold text-aviva-blue">
             Pedidos (Admin)
           </h1>
-          <p className="text-sm text-gray-600">
+          <p className="text-sm text-gray-800">
             Acompanhe e atualize o status dos pedidos.
           </p>
         </div>
@@ -126,19 +126,19 @@ export default function AdminOrdersPage() {
         <div className="flex gap-2">
           <Link
             href="/admin"
-            className="px-4 py-2 rounded-xl border border-gray-200 hover:bg-gray-50 text-gray-700 font-semibold"
+            className="px-4 py-2 rounded-xl border border-gray-200 hover:bg-gray-50 text-gray-900 font-semibold"
           >
             Voltar
           </Link>
           <button
             onClick={() => router.push('/store')}
-            className="px-4 py-2 rounded-xl border border-gray-200 hover:bg-gray-50 text-gray-700 font-semibold"
+            className="px-4 py-2 rounded-xl border border-gray-200 hover:bg-gray-50 text-gray-900 font-semibold"
           >
             Ir para Store
           </button>
           <button
             onClick={load}
-            className="px-4 py-2 rounded-xl bg-yellow-500 hover:bg-yellow-600 text-white font-extrabold"
+            className="px-4 py-2 rounded-xl bg-aviva-blue hover:bg-blue-600 text-white font-extrabold"
           >
             Recarregar
           </button>
@@ -154,13 +154,13 @@ export default function AdminOrdersPage() {
 
         <div className="bg-white rounded-2xl shadow p-4 flex flex-col sm:flex-row gap-3 sm:items-center sm:justify-between">
           <div>
-            <p className="text-sm text-gray-600">
+            <p className="text-sm text-gray-800">
               Total: <b>{orders.length}</b>
             </p>
           </div>
 
           <div className="flex items-center gap-2">
-            <label className="text-sm font-semibold text-[#1D5176]">
+            <label className="text-sm font-semibold text-aviva-blue">
               Filtrar:
             </label>
             <select
@@ -180,9 +180,9 @@ export default function AdminOrdersPage() {
 
         <div className="bg-white rounded-2xl shadow overflow-hidden">
           {loading ? (
-            <div className="p-6 text-gray-600">Carregando...</div>
+            <div className="p-6 text-gray-800">Carregando...</div>
           ) : filtered.length === 0 ? (
-            <div className="p-6 text-gray-600">Nenhum pedido encontrado.</div>
+            <div className="p-6 text-gray-800">Nenhum pedido encontrado.</div>
           ) : (
             <div className="divide-y">
               {filtered.map((o) => (
@@ -191,18 +191,18 @@ export default function AdminOrdersPage() {
                   className="p-4 flex flex-col md:flex-row md:items-center md:justify-between gap-3"
                 >
                   <div className="min-w-0">
-                    <p className="font-extrabold text-[#1D5176]">
+                    <p className="font-extrabold text-aviva-blue">
                       {o.customer_name}{' '}
-                      <span className="text-xs text-gray-500 font-medium">
+                      <span className="text-xs text-gray-700 font-medium">
                         • {new Date(o.created_at).toLocaleString('pt-BR')}
                       </span>
                     </p>
 
-                    <p className="text-sm text-gray-600 mt-1">
-                      Total: <b className="text-yellow-600">R$ {o.total.toFixed(2)}</b>
+                    <p className="text-sm text-gray-800 mt-1">
+                      Total: <b className="text-aviva-blue">R$ {o.total.toFixed(2)}</b>
                     </p>
 
-                    <p className="text-xs text-gray-600 mt-1 truncate">
+                    <p className="text-xs text-gray-800 mt-1 truncate">
                       Itens:{' '}
                       {(o.items ?? [])
                         .map((i) => i.name)
@@ -211,7 +211,7 @@ export default function AdminOrdersPage() {
                     </p>
 
                     {o.customer_phone && (
-                      <p className="text-xs text-gray-600 mt-1">
+                      <p className="text-xs text-gray-800 mt-1">
                         WhatsApp: <b>{o.customer_phone}</b>
                       </p>
                     )}
@@ -232,7 +232,7 @@ export default function AdminOrdersPage() {
 
                     <Link
                       href={`/admin/orders/${o.id}`}
-                      className="px-4 py-2 rounded-xl bg-[#1D5176] hover:bg-[#163e59] text-white font-extrabold text-center"
+                      className="px-4 py-2 rounded-xl bg-aviva-blue hover:bg-blue-600 text-white font-extrabold text-center"
                     >
                       Detalhes
                     </Link>

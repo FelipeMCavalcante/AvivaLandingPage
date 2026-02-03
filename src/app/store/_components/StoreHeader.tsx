@@ -12,7 +12,7 @@ export default function StoreHeader({
 
   return (
     <header className="flex justify-between items-center px-6 py-4 bg-white shadow-md relative">
-      <h2 className="text-[#1D5176] text-lg font-semibold">Loja Aviva</h2>
+      <h2 className="text-aviva-blue text-lg font-semibold">Loja Aviva</h2>
 
       <img
         src="/avivablue.png"
@@ -24,7 +24,7 @@ export default function StoreHeader({
         {/* Carrinho */}
         <button
           onClick={toggleCart}
-          className="relative bg-yellow-500 hover:bg-yellow-600 p-3 rounded-full shadow-lg transition"
+          className="relative bg-aviva-blue hover:bg-blue-600 p-3 rounded-full shadow-lg transition"
         >
           <img
             src="/imgLoja/carro.png"
@@ -41,7 +41,7 @@ export default function StoreHeader({
         {/* Perfil (abre menu lateral) */}
         <button
           onClick={onOpenAccount}
-          className="text-[#1D5176] hover:text-blue-700 transition"
+          className="text-aviva-blue hover:text-blue-700 transition"
           title="Minha conta"
         >
           <FaUserCircle size={32} />

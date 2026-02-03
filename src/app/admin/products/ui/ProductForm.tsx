@@ -56,15 +56,15 @@ export default function ProductForm({
   return (
     <div className="bg-white rounded-2xl shadow p-6">
       <div className="flex items-center justify-between mb-5">
-        <h2 className="text-lg font-extrabold text-[#1D5176]">Produto</h2>
-        <Link href="/admin/products" className="text-sm font-semibold text-[#1D5176] hover:underline">
+        <h2 className="text-lg font-extrabold text-aviva-blue">Produto</h2>
+        <Link href="/admin/products" className="text-sm font-semibold text-aviva-blue hover:underline">
           Voltar
         </Link>
       </div>
 
       <div className="grid gap-4">
         <div>
-          <label className="text-sm font-semibold text-[#1D5176]">Nome</label>
+          <label className="text-sm font-semibold text-aviva-blue">Nome</label>
           <input
             className="mt-1 w-full border rounded-xl p-3 outline-none"
             value={name}
@@ -73,7 +73,7 @@ export default function ProductForm({
         </div>
 
         <div>
-          <label className="text-sm font-semibold text-[#1D5176]">Descrição</label>
+          <label className="text-sm font-semibold text-aviva-blue">Descrição</label>
           <textarea
             className="mt-1 w-full border rounded-xl p-3 outline-none min-h-[110px]"
             value={description}
@@ -83,7 +83,7 @@ export default function ProductForm({
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
-            <label className="text-sm font-semibold text-[#1D5176]">Preço</label>
+            <label className="text-sm font-semibold text-aviva-blue">Preço</label>
             <input
               type="number"
               className="mt-1 w-full border rounded-xl p-3 outline-none"
@@ -93,7 +93,7 @@ export default function ProductForm({
           </div>
 
           <div>
-            <label className="text-sm font-semibold text-[#1D5176]">Tipo</label>
+            <label className="text-sm font-semibold text-aviva-blue">Tipo</label>
             <select
               className="mt-1 w-full border rounded-xl p-3 outline-none"
               value={type}
@@ -107,7 +107,7 @@ export default function ProductForm({
         </div>
 
         <div>
-          <label className="text-sm font-semibold text-[#1D5176]">Imagens (1 URL por linha)</label>
+          <label className="text-sm font-semibold text-aviva-blue">Imagens (1 URL por linha)</label>
           <textarea
             className="mt-1 w-full border rounded-xl p-3 outline-none min-h-[110px]"
             value={imagesText}
@@ -117,7 +117,7 @@ export default function ProductForm({
 
         {type === 'roupa' && (
           <div>
-            <label className="text-sm font-semibold text-[#1D5176]">Tamanhos (1 por linha)</label>
+            <label className="text-sm font-semibold text-aviva-blue">Tamanhos (1 por linha)</label>
             <textarea
               className="mt-1 w-full border rounded-xl p-3 outline-none min-h-[90px]"
               value={sizesText}
@@ -126,7 +126,7 @@ export default function ProductForm({
           </div>
         )}
 
-        <label className="inline-flex items-center gap-2 text-sm text-gray-700">
+        <label className="inline-flex items-center gap-2 text-sm text-gray-900">
           <input
             type="checkbox"
             checked={active}
@@ -138,7 +138,7 @@ export default function ProductForm({
         <button
           onClick={submit}
           disabled={saving}
-          className="mt-2 bg-yellow-500 hover:bg-yellow-600 text-white py-3 rounded-xl font-extrabold disabled:opacity-60"
+          className="mt-2 bg-aviva-blue hover:bg-blue-600 text-white py-3 rounded-xl font-extrabold disabled:opacity-60"
         >
           {saving ? 'Salvando...' : 'Salvar'}
         </button>

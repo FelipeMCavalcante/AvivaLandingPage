@@ -56,7 +56,7 @@ export default function ProductView({ product, mode = 'page', onClose }: Props) 
                   key={img}
                   onClick={() => setActiveImg(img)}
                   className={`shrink-0 rounded-xl border ${
-                    activeImg === img ? 'border-[#1D5176]' : 'border-transparent'
+                    activeImg === img ? 'border-aviva-blue' : 'border-transparent'
                   }`}
                 >
                   <img
@@ -72,20 +72,20 @@ export default function ProductView({ product, mode = 'page', onClose }: Props) 
 
         {/* Infos */}
         <div>
-          <h1 className="text-2xl font-extrabold text-[#1D5176]">
+          <h1 className="text-2xl font-extrabold text-aviva-blue">
             {product.name}
           </h1>
 
-          <p className="text-gray-600 mt-2">{product.description}</p>
+          <p className="text-gray-800 mt-2">{product.description}</p>
 
-          <p className="mt-4 text-2xl font-bold text-yellow-600">
+          <p className="mt-4 text-2xl font-bold text-aviva-blue">
             R$ {Number(product.price).toFixed(2)}
           </p>
 
           {/* Tamanho */}
           {isClothing && (
             <div className="mt-6">
-              <p className="text-sm font-semibold text-[#1D5176] mb-2">
+              <p className="text-sm font-semibold text-aviva-blue mb-2">
                 Selecione o tamanho
               </p>
               <div className="flex flex-wrap gap-2">
@@ -95,8 +95,8 @@ export default function ProductView({ product, mode = 'page', onClose }: Props) 
                     onClick={() => setSize(s)}
                     className={`px-4 py-2 rounded-lg border transition ${
                       size === s
-                        ? 'bg-[#1D5176] text-white border-[#1D5176]'
-                        : 'bg-white text-[#1D5176] border-gray-200 hover:border-[#1D5176]'
+                        ? 'bg-aviva-blue text-white border-aviva-blue'
+                        : 'bg-white text-aviva-blue border-gray-200 hover:border-aviva-blue'
                     }`}
                   >
                     {s}
@@ -109,7 +109,7 @@ export default function ProductView({ product, mode = 'page', onClose }: Props) 
           <div className="mt-6 flex gap-3">
             <button
               onClick={handleAdd}
-              className="flex-1 bg-yellow-500 hover:bg-yellow-600 text-white px-6 py-3 rounded-xl font-semibold transition"
+              className="flex-1 bg-aviva-blue hover:bg-blue-600 text-white px-6 py-3 rounded-xl font-semibold transition"
             >
               Adicionar ao carrinho
             </button>
@@ -117,7 +117,7 @@ export default function ProductView({ product, mode = 'page', onClose }: Props) 
             {mode === 'modal' && onClose && (
               <button
                 onClick={onClose}
-                className="px-5 py-3 rounded-xl border border-gray-200 text-gray-700 hover:bg-gray-50 transition"
+                className="px-5 py-3 rounded-xl border border-gray-200 text-gray-900 hover:bg-gray-50 transition"
               >
                 Fechar
               </button>

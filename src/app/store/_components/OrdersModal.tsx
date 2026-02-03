@@ -73,34 +73,34 @@ export default function OrdersModal({ onClose }: { onClose: () => void }) {
   return (
     <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center px-4">
       <div className="bg-white rounded-2xl p-6 max-w-lg w-full shadow-2xl relative">
-        <button onClick={onClose} className="absolute top-3 right-4 text-gray-400 hover:text-gray-600">
+        <button onClick={onClose} className="absolute top-3 right-4 text-gray-600 hover:text-gray-800">
           ✕
         </button>
 
-        <h2 className="text-2xl font-extrabold text-[#1D5176] mb-4">Histórico de pedidos</h2>
+        <h2 className="text-2xl font-extrabold text-aviva-blue mb-4">Histórico de pedidos</h2>
 
         {loading ? (
-          <p className="text-gray-600 text-center">Carregando pedidos...</p>
+          <p className="text-gray-800 text-center">Carregando pedidos...</p>
         ) : orders.length === 0 ? (
-          <p className="text-gray-600 text-center">Você ainda não possui pedidos.</p>
+          <p className="text-gray-800 text-center">Você ainda não possui pedidos.</p>
         ) : (
           <div className="space-y-3 max-h-96 overflow-y-auto">
             {orders.map((o) => (
               <div key={o.id} className="border rounded-xl p-4">
                 <div className="flex justify-between items-center">
-                  <span className="text-sm font-bold text-[#1D5176]">
+                  <span className="text-sm font-bold text-aviva-blue">
                     {new Date(o.created_at).toLocaleString('pt-BR')}
                   </span>
-                  <span className="text-yellow-600 font-extrabold text-sm">
+                  <span className="text-aviva-blue font-extrabold text-sm">
                     R$ {Number(o.total).toFixed(2)}
                   </span>
                 </div>
 
-                <p className="text-xs text-gray-600 mt-1">
+                <p className="text-xs text-gray-800 mt-1">
                   Status: <span className="font-semibold">{o.status}</span>
                 </p>
 
-                <p className="text-xs text-gray-600 mt-2">
+                <p className="text-xs text-gray-800 mt-2">
                   Itens:{' '}
                   <span className="font-medium">
                     {(o.items ?? []).map((i) => i.name).filter(Boolean).join(', ') || '—'}
