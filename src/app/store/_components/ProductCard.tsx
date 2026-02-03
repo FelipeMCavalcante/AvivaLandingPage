@@ -13,24 +13,36 @@ export default function ProductCard({ product }: { product: Product }) {
     <Link
       href={`/store/${product.id}`}
       scroll={false}
-      className="bg-white rounded-2xl shadow p-4 flex flex-col"
+      className="group bg-white rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col overflow-hidden hover:-translate-y-1"
     >
-      <img
-        src={image}
-        alt={product.name}
-        className="rounded-xl w-full h-56 object-cover"
-      />
+      <div className="relative aspect-[4/5] overflow-hidden bg-gray-100">
+        <img
+          src={image}
+          alt={product.name}
+          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+        />
+        <div className="absolute inset-0 bg-black/0 group-hover:bg-black/5 transition-colors duration-300" />
+      </div>
 
-      <h3 className="mt-3 font-bold text-aviva-blue">{product.name}</h3>
-      <p className="text-gray-800 text-sm line-clamp-2">{product.description}</p>
+      <div className="p-5 flex flex-col flex-grow">
+        <h3 className="font-bold text-gray-900 group-hover:text-aviva-blue transition-colors text-lg line-clamp-1">
+          {product.name}
+        </h3>
 
-      <p className="mt-2 text-aviva-blue font-semibold">
-        R$ {Number(product.price).toFixed(2)}
-      </p>
+        <p className="text-gray-500 text-sm mt-2 line-clamp-2 leading-relaxed mb-4 flex-grow">
+          {product.description}
+        </p>
 
-      <span className="mt-3 inline-flex justify-center bg-aviva-blue hover:bg-blue-600 text-white px-4 py-2 rounded-lg">
-        Ver detalhes
-      </span>
+        <div className="mt-auto">
+          <p className="text-2xl font-extrabold text-aviva-blue">
+            R$ {Number(product.price).toFixed(2)}
+          </p>
+
+          <button className="w-full mt-4 bg-gray-50 text-aviva-blue font-semibold py-3 rounded-xl group-hover:bg-aviva-blue group-hover:text-white transition-all duration-300">
+            Ver detalhes
+          </button>
+        </div>
+      </div>
     </Link>
   );
 }
