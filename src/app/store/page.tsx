@@ -10,8 +10,10 @@ import CartDrawer from './_components/CartDrawer';
 import AccountDrawer from './_components/AccountDrawer';
 import ProfileModal from './_components/ProfileModal';
 import OrdersModal from './_components/OrdersModal';
+import CheckoutModal from './_components/CheckoutModal';
 
 import { useCart } from './_context/CartContext';
+import { OrderItem } from '@/app/_types/shop';
 import { listProducts, type Product } from './_services/products';
 
 const ADMIN_EMAIL = 'felipe.de.moraes.cavalcante@gmail.com';
@@ -26,6 +28,7 @@ export default function StorePage() {
   const [accountOpen, setAccountOpen] = useState(false);
   const [profileOpen, setProfileOpen] = useState(false);
   const [ordersOpen, setOrdersOpen] = useState(false);
+  const [checkoutData, setCheckoutData] = useState<{ items: OrderItem[], total: number } | null>(null);
 
   const [userEmail, setUserEmail] = useState<string | null>(null);
   const [userName, setUserName] = useState<string>('');
@@ -102,7 +105,21 @@ export default function StorePage() {
       </div>
 
       {/* Carrinho */}
-      {isCartOpen && <CartDrawer onClose={closeCart} />}
+      {isCartOpen && (
+        <CartDrawer
+          onClose={closeCart}
+          onFinish={(items, total) => setCheckoutData({ items, total })}
+        />
+      )}
+
+      {/* Modal Checkout (WhatsApp) */}
+      {checkoutData && (
+        <CheckoutModal
+          items={checkoutData.items}
+          total={checkoutData.total}
+          onClose={() => setCheckoutData(null)}
+        />
+      )}
 
       {/* Drawer da conta */}
       {accountOpen && (
