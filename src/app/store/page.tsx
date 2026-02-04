@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation';
 import { supabase } from '@/lib/supabaseClient';
 
 import StoreHeader from './_components/StoreHeader';
+import StoreFooter from './_components/StoreFooter';
 import ProductGrid from './_components/ProductGrid';
 import CartDrawer from './_components/CartDrawer';
 import AccountDrawer from './_components/AccountDrawer';
@@ -93,16 +94,34 @@ export default function StorePage() {
   };
 
   return (
-    <section className="bg-[#F8F8F8] min-h-screen relative">
+    <section className="bg-gray-50 min-h-screen flex flex-col">
       <StoreHeader onOpenAccount={openAccount} />
 
-      <div className="px-6 py-10 md:px-24">
-        <h1 className="text-3xl font-extrabold text-aviva-blue mb-8 text-center">
-          Loja Aviva
-        </h1>
-
-        <ProductGrid products={products} loading={loadingProducts} />
+      {/* Hero Section */}
+      <div className="bg-gradient-to-r from-aviva-blue to-blue-600 text-white pt-24 pb-32 px-6 text-center">
+        <div className="max-w-3xl mx-auto space-y-6">
+          <h1 className="text-4xl md:text-6xl font-extrabold tracking-tight">
+            Bem-vindo à Loja Aviva
+          </h1>
+          <p className="text-lg md:text-xl text-blue-100 max-w-2xl mx-auto">
+            Descubra nossa coleção exclusiva. Moda, estilo e qualidade que você merece, tudo em um só lugar.
+          </p>
+        </div>
       </div>
+
+      <main className="flex-grow -mt-20 z-10 relative px-6">
+        <div className="max-w-7xl mx-auto">
+          {/* Featured Products / Grid */}
+          <div className="bg-white rounded-3xl shadow-xl p-6 md:p-12 mb-16">
+            <h2 className="text-2xl font-bold text-gray-900 mb-8 border-l-4 border-aviva-blue pl-4">
+              Produtos em Destaque
+            </h2>
+            <ProductGrid products={products} loading={loadingProducts} />
+          </div>
+        </div>
+      </main>
+
+      <StoreFooter />
 
       {/* Carrinho */}
       {isCartOpen && (
